@@ -1,2 +1,7 @@
 .idea/
+
 ReallyAwesomeFeatureRequests.iml
+
+API/API.iml
+API/node_modules/
+API/models/*.js
