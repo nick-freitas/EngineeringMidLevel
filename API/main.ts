@@ -1,10 +1,10 @@
 //import reflect metadata so we can inject in rest of application
 import "reflect-metadata";
 
-import {initializeBindings, iocContainer} from "./inversify.config";
+import {initializeBindings, iocContainer} from "./config/inversify.config";
 import {App} from "./app";
 import {iocTypes} from "./ioc-types";
-import {AppConfig} from "./app-config";
+import {AppConfig} from "./config/app-config";
 
 // initialize the ioc bindings so we can inject properly
 initializeBindings();

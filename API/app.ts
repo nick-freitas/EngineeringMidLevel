@@ -2,7 +2,7 @@ import * as hapi from "hapi";
 import {inject} from "inversify";
 
 import {iocTypes} from "./ioc-types";
-import {AppConfig} from "./app-config";
+import {AppConfig} from "./config/app-config";
 
 /**
  * The Application
