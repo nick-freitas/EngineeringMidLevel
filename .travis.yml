@@ -10,7 +10,7 @@ install:
   - npm install
   - cd ../
 before_script:
-  - mysql -u root -e "ALTER USER root@localhost IDENTIFIED BY 'something';"
+  - mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'something';"
   - mysql -u $RAFR_DB_USERNAME -p$RAFR_DB_PASSWORD < ./models/schema.sql
 script:
   - npm run generate-models
