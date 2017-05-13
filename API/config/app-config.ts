@@ -3,9 +3,11 @@ import {injectable} from "inversify";
 @injectable()
 export class AppConfig {
     server: ServerConfig;
+    database: DatabaseConfig;
 
-    constructor(){
+    constructor() {
         this.initializeServer();
+        this.initializeDatabse();
     }
 
     private initializeServer() {
@@ -13,7 +15,7 @@ export class AppConfig {
         let portNumber = 3000;
 
         const environmentPortNumber = parseInt(process.env.PORT);
-        if(!isNaN(environmentPortNumber) && environmentPortNumber > 0){
+        if (!isNaN(environmentPortNumber) && environmentPortNumber > 0) {
             portNumber = environmentPortNumber;
         }
 
@@ -22,9 +24,29 @@ export class AppConfig {
             host: host
         };
     }
+
+    private initializeDatabse() {
+        this.database = {
+            name: process.env.RERF_DB_NAME,
+            username: process.env.RAFR_DB_USERNAME,
+            password: process.env.RARF_DB_PASSWORD,
+            host: process.env.RAFR_DB_HOST,
+            dialect: "mysql",
+            logging: console.log,
+        };
+    }
 }
 
-interface ServerConfig{
+interface ServerConfig {
     portNumber,
     host
+}
+
+interface DatabaseConfig {
+    name,
+    username,
+    password,
+    host,
+    dialect,
+    logging
 }
