@@ -5,10 +5,10 @@ import {Route} from "./base-route";
 
 @injectable()
 export class Routes {
-    constructor(@inject(iocTypes.SimpleTestRoute) private simpleTestRoute: Route) {
+    constructor(@inject(iocTypes.ClientRoute) private clientRoute: Route) {
     }
 
     public addAllRoutes() {
-        this.simpleTestRoute.addRoutes();
+        this.clientRoute.addRoutes();
     }
 }
