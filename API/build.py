@@ -14,11 +14,19 @@ def installGlobalNpmPackages():
     return
 
 
+# genetate sequelize models
+def generateSequelizeModels():
+    response = subprocess.run(
+        ["npm", "run", "generate-models"], stdout=subprocess.PIPE, shell=True)
+    print(response.stdout.decode('utf-8'))
+    return
+
+
 def main():
     print('Building API')
     # installGlobalNpmPackages()
     # installNpmPackages()
-    # todo setup db with sql file
+    generateSequelizeModels()
     print('Finished Building API')
 
 
