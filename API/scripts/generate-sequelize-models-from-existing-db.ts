@@ -19,6 +19,6 @@ sequelizeAuto.run(error => {
     const tableList = sequelizeAuto.tables;
     const fkList = sequelizeAuto.foreignKeys;
 
-    console.log(tableList);
-    console.log(fkList);
+    // console.log(tableList);
+    // console.log(fkList);
 });
