@@ -1,16 +1,7 @@
 import subprocess
 
-sequelizePath = ".\\node_modules\.bin\sequelize"
 
-
-def createStatusModel():
-    response = subprocess.run(
-        [sequelizePath, "model:create", "--force", "--name", "Status", "--attributes",
-         "\"status:string\""], stdout=subprocess.PIPE, shell=True)
-    print(response.stdout.decode('utf-8'))
-    return
-
-
+# installs all of the module's npm packages
 def installNpmPackages():
     response = subprocess.run(
         ["npm", "i"], stdout=subprocess.PIPE, shell=True)
@@ -18,10 +9,16 @@ def installNpmPackages():
     return
 
 
+# install all global npm packages needed by this module
+def installGlobalNpmPackages():
+    return
+
+
 def main():
     print('Building API')
+    # installGlobalNpmPackages()
     # installNpmPackages()
-    createStatusModel()
+    # todo setup db with sql file
     print('Finished Building API')
 
 
