@@ -24,8 +24,9 @@ def generateSequelizeModels():
 
 def main():
     print('Building API')
+
     # installGlobalNpmPackages()
-    # installNpmPackages()
+    installNpmPackages()
     generateSequelizeModels()
     print('Finished Building API')
 
