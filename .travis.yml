@@ -2,16 +2,10 @@ language: node_js
 node_js:
   - "node"
 env:
-  - RAFR_DB_HOST=localhost RAFR_DB_NAME=rafr NODE_ENV=development RAFR_DB_USERNAME=root RAFR_DB_PASSWORD=password
+  - RAFR_DB_HOST=localhost RAFR_DB_NAME=rafr NODE_ENV=development RAFR_DB_USERNAME=root RAFR_DB_PASSWORD=
 services:
   - mysql
-install:
-  - cd ./API/
-  - npm install
-  - cd ../
 before_script:
-  - mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';"
-  - mysql -u root -ppassword < ./models/schema.sqls
+  - mysql -u root < ./models/schema.sql
 script:
   - npm run generate-models
-  - npm test
