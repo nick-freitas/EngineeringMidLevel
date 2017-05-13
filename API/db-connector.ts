@@ -26,6 +26,7 @@ export class DbConnector {
         };
 
         this._connection = this.createConnection(dbConnectionOptions);
+        return this._connection;
     }
 
     private createConnection({dbName, dbUsername, dbPassword, dbHost, dbDialect, dbLogging}) {
