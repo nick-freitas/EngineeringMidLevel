@@ -5,13 +5,15 @@ import {initializeBindings, iocContainer} from "./config/inversify.config";
 import {App} from "./app";
 import {iocTypes} from "./ioc-types";
 import {AppConfig} from "./config/app-config";
+import {DbConnector} from "./db-connector";
 
 // initialize the ioc bindings so we can inject properly
 initializeBindings();
 
 // create instance of app and inject dependencies
 const appConfig = iocContainer.get<AppConfig>(iocTypes.AppConfig);
-const app = new App(appConfig);
+const dbConnector = iocContainer.get<DbConnector>(iocTypes.DbConnector);
+const app = new App(appConfig, dbConnector);
 
 // initialize app
 app.initializeServer()
