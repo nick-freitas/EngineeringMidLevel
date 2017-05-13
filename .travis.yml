@@ -4,4 +4,6 @@ node_js:
 env:
   - RAFR_DB_HOST=localhost RAFR_DB_NAME=rafr NODE_ENV=development
 script:
-  - cd ./API/ && npm run build
+  - cd ./API/
+  - npm run build
+  - npm test
