@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "npm i && npm run generate-models",
     "start": "node -r ts-node/register ./main",
     "generate-models": "node -r ts-node/register ./scripts/generate-sequelize-models-from-existing-db",
     "test": "echo 'called test'"

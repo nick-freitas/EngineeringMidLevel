@@ -3,7 +3,12 @@ node_js:
   - "node"
 env:
   - RAFR_DB_HOST=localhost RAFR_DB_NAME=rafr NODE_ENV=development
+services:
+  - mysql
 script:
   - cd ./API/
-  - npm run build
+  - npm install
+  - mysql -u root < ALTER USER $RARF_DB_USERNAME@$RAFR_DB_HOST IDENTIFIED BY '$RARF_DB_PASSWORD';
+  - mysql -u $RAFR_DB_USERNAME -p$RAFR_DB_PASSWORD < ./models/schema.sql
+  - npm run generate-models
   - npm test
