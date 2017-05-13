@@ -4,3 +4,6 @@ node_js:
   - "node"
 install:
   - npm install
+env:
+  - RAFR_DB_HOST=localhost RAFR_DB_NAME=rafr  NODE_ENV=development
+  - RAFR_DB_HOST=localhost RAFR_DB_NAME=rafr  NODE_ENV=production
