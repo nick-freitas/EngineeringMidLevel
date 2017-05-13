@@ -8,6 +8,8 @@ export const iocTypes = {
     AppConfig: Symbol("AppConfig"),
     DbConnector: Symbol("DbConnector"),
     Server: Symbol("Server"),
-    SimpleTestRoute: Symbol("SimpleTestRoute"),
-    Routes: Symbol("Routes")
+    Routes: Symbol("Routes"),
+    ClientService: Symbol("ClientService"),
+    ClientRoute: Symbol("ClientRoute"),
+    ClientController: Symbol("ClientController")
 };

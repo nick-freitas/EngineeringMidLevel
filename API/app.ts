@@ -30,7 +30,16 @@ export class App {
         const serverUri = JSON.stringify(this.server.server.info.uri);
         console.info(`Started server at ${serverUri}`);
 
-        //add all routes
+
+        // add all routes
         this.routes.addAllRoutes();
+
+
+        // add sanity route check
+        this.server.server.route({
+            method: "GET",
+            path: '/',
+            handler: (req, reply) => reply('SANITY!!!')
+        });
     }
 }

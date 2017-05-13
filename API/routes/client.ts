@@ -2,11 +2,12 @@ import {Route} from "./base-route";
 import {inject, injectable} from "inversify";
 import {Server} from "../server";
 import {iocTypes} from "../ioc-types";
+import {ClientController} from "../controllers/client";
 
 @injectable()
 export class ClientRoute extends Route {
     constructor(@inject(iocTypes.Server) server: Server,
-                @inject(iocTypes.Server) private clientController: ClientController) {
+                @inject(iocTypes.ClientController) private clientController: ClientController) {
         super(server);
     }
 
@@ -14,13 +15,13 @@ export class ClientRoute extends Route {
         this.server.route({
             method: 'GET',
             path: `/clients`,
-            handler: this.clientController.getMany
+            handler: (req, reply) => this.clientController.getMany(req, reply)
         });
 
         this.server.route({
             method: 'GET',
             path: `/clients/{id}`,
-            handler: this.clientController.getOne
+            handler: (req, reply) => this.clientController.getOne(req, reply)
         });
     }
 }
