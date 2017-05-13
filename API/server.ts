@@ -6,24 +6,34 @@ import {iocTypes} from "./ioc-types";
 
 @injectable()
 export class Server {
-    server;
+    private _server;
 
     constructor(@inject(iocTypes.AppConfig) private appConfig: AppConfig) {
-        this.server = new hapi.Server();
+    }
+
+    get server() {
+        if (this._server) {
+            return this._server;
+        }
+
+        this._server = new hapi.Server();
+        return this._server;
     }
 
     public async initializeServer() {
-        // start the server server
-        this.setServerConnection();
-        this.server.start();
-    }
-
-    private setServerConnection() {
+        //set connection
         this.server.connection({
             host: this.appConfig.server.host,
             port: this.appConfig.server.portNumber
         });
+
+        // start the server server
+        return new Promise((resolve, reject) => this.server.start(err => {
+            if (err) {
+                return reject(err);
+            }
+
+            return resolve();
+        }));
     }
-
-
 }

@@ -1,8 +1,8 @@
 import * as Sequelize from "sequelize";
 import {inject, injectable} from "inversify";
 
-import {iocTypes} from "./ioc-types";
 import {AppConfig} from "./config/app-config";
+import {iocTypes} from "./ioc-types";
 
 @injectable()
 export class DbConnector {
