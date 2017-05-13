@@ -7,5 +7,7 @@
 export const iocTypes = {
     AppConfig: Symbol("AppConfig"),
     DbConnector: Symbol("DbConnector"),
-    Server: Symbol("Server")
+    Server: Symbol("Server"),
+    SimpleTestRoute: Symbol("SimpleTestRoute"),
+    Routes: Symbol("Routes")
 };

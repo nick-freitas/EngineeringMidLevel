@@ -3,9 +3,10 @@ import "reflect-metadata";
 
 import {initializeBindings, iocContainer} from "./config/inversify.config";
 import {App} from "./app";
-import {iocTypes} from "./ioc-types";
 import {DbConnector} from "./db-connector";
 import {Server} from "./server";
+import {Routes} from "./routes/routes";
+import {iocTypes} from "./ioc-types";
 
 // initialize the ioc bindings so we can inject properly
 initializeBindings();
@@ -13,7 +14,8 @@ initializeBindings();
 // create instance of app and inject dependencies
 const dbConnector = iocContainer.get<DbConnector>(iocTypes.DbConnector);
 const server = iocContainer.get<Server>(iocTypes.Server);
-const app = new App(dbConnector, server);
+const routes = iocContainer.get<Routes>(iocTypes.Routes);
+const app = new App(dbConnector, server, routes);
 
 // initialize app
 app.initializeApp()

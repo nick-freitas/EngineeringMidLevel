@@ -1,10 +1,9 @@
-import * as hapi from "hapi";
 import {inject} from "inversify";
 
-import {iocTypes} from "./ioc-types";
-import {AppConfig} from "./config/app-config";
 import {DbConnector} from "./db-connector";
 import {Server} from "./server";
+import {Routes} from "./routes/routes";
+import {iocTypes} from "./ioc-types";
 
 /**
  * The Application
@@ -13,7 +12,8 @@ import {Server} from "./server";
  */
 export class App {
     constructor(@inject(iocTypes.DbConnector) private dbConnector: DbConnector,
-                @inject(iocTypes.Server) private  server: Server) {
+                @inject(iocTypes.Server) private  server: Server,
+                @inject(iocTypes.Routes) private  routes: Routes) {
     }
 
     public async initializeApp() {
@@ -29,6 +29,8 @@ export class App {
         await this.server.initializeServer();
         const serverUri = JSON.stringify(this.server.server.info.uri);
         console.info(`Started server at ${serverUri}`);
-    }
 
+        //add all routes
+        this.routes.addAllRoutes();
+    }
 }
