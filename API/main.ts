@@ -1,6 +1,3 @@
-//import reflect metadata so we can inject in rest of application
-import "reflect-metadata";
-
 import {initializeBindings, iocContainer} from "./config/inversify.config";
 import {App} from "./app";
 import {DbConnector} from "./db-connector";

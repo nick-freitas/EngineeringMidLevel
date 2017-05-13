@@ -12,7 +12,7 @@ import {iocTypes} from "./ioc-types";
  */
 export class App {
     constructor(@inject(iocTypes.DbConnector) private dbConnector: DbConnector,
-                @inject(iocTypes.Server) private  server: Server,
+                @inject(iocTypes.Server) public  server: Server,
                 @inject(iocTypes.Routes) private  routes: Routes) {
     }
 

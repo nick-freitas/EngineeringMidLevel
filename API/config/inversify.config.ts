@@ -1,3 +1,6 @@
+//import reflect metadata so we can inject in rest of application
+import "reflect-metadata";
+
 import {Container} from "inversify";
 
 import {AppConfig} from "./app-config";

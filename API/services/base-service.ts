@@ -6,7 +6,6 @@ export abstract class Service {
     }
 
     async getMany(reqBody) {
-        console.log('get many here');
         return [42, 42, 42];
     }
 
