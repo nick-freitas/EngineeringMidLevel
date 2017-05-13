@@ -1,8 +1,8 @@
-language: python
-
+language: node_js
+node_js:
+  - "node"
 python:
   - "3.6"
-
 env:
   - RAFR_DB_HOST=localhost RAFR_DB_NAME=rafr NODE_ENV=development
   - RAFR_DB_HOST=localhost RAFR_DB_NAME=rafr NODE_ENV=production
