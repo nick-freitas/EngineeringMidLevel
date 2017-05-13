@@ -7,7 +7,7 @@ export abstract class Controller {
     }
 
     getMany(req, reply) {
-        let response = this.service.getMany(req.body);
+        let response = this.service.getMany();
         reply(response);
     }
 

@@ -5,7 +5,7 @@ export abstract class Service {
     constructor() {
     }
 
-    async getMany(reqBody) {
+    async getMany() {
         return [42, 42, 42];
     }
 
