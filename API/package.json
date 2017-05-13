@@ -1,0 +1,26 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node -r ts-node/register ./main"
+  },
+  "dependencies": {
+    "hapi": "16.1.0",
+    "immutable": "3.8.1",
+    "inversify": "4.1.0",
+    "reflect-metadata": "0.1.10"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.18",
+    "@types/chai": "3.5.2",
+    "@types/mocha": "2.2.41",
+    "@types/reflect-metadata": "0.0.5",
+    "chai": "3.5.0",
+    "mocha": "3.2.0",
+    "supertest": "3.0.0",
+    "ts-node": "3.0.4",
+    "tslint": "5.2.0",
+    "typescript": "2.3.2"
+  }
+}
