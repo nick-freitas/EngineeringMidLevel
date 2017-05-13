@@ -1,6 +1,4 @@
-language:
-  - nodejs
-  - python
+language: python
 node_js:
   - "node"
 python:

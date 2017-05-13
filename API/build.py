@@ -4,7 +4,7 @@ import subprocess
 # installs all of the module's npm packages
 def installNpmPackages():
     response = subprocess.run(
-        ["npm", "i"], stdout=subprocess.PIPE, shell=True)
+        ["npm", "install"], stdout=subprocess.PIPE, shell=True)
     print(response.stdout.decode('utf-8'))
     return
 
