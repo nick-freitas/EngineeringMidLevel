@@ -7,4 +7,4 @@ env:
   - RAFR_DB_HOST=localhost RAFR_DB_NAME=rafr NODE_ENV=development
   - RAFR_DB_HOST=localhost RAFR_DB_NAME=rafr NODE_ENV=production
 script:
-  - python ./API/build.py
+  - cd ./API/ && python ./build.py
