@@ -8,6 +8,7 @@
     "test": "node ./node_modules/mocha/bin/_mocha --require ts-node/register --ui bdd test/*.spec.ts"
   },
   "dependencies": {
+    "boom": "^4.3.1",
     "good": "^7.1.0",
     "hapi": "16.1.0",
     "immutable": "3.8.1",
