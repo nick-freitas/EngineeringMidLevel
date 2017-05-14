@@ -10,17 +10,21 @@ env:
 
 phases:
   install:
-    - cd ./API/
-    - npm install
-    - cd ../
+    commands:
+      - cd ./API/
+      - npm install
+      - cd ../
   pre_build:
-    - cd ./API/
-    - mysql -u root -ppassword < ./models/schema.sql
-    - cd ../
+    commands:
+      - cd ./API/
+      - mysql -u root -ppassword < ./models/schema.sql
+      - cd ../
   build:
-    - cd ./API/
-    - npm tun generate-models
-    - cd ../
+    commands:
+      - cd ./API/
+      - npm tun generate-models
+      - cd ../
   post_build:
-    - cd ./API/
-    - npm start
+    commands:
+      - cd ./API/
+      - npm start
