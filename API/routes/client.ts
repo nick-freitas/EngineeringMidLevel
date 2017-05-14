@@ -23,5 +23,23 @@ export class ClientRoute extends Route {
             path: `/clients/{id}`,
             handler: (req, reply) => this.clientController.getOne(req, reply)
         });
+
+        this.server.route({
+            method: 'POST',
+            path: `/clients`,
+            handler: (req, reply) => this.clientController.create(req, reply)
+        });
+
+        this.server.route({
+            method: 'DELETE',
+            path: `/clients/{id}`,
+            handler: (req, reply) => this.clientController.destroy(req, reply)
+        });
+
+        this.server.route({
+            method: 'PUT',
+            path: `/clients/{id}`,
+            handler: (req, reply) => this.clientController.update(req, reply)
+        });
     }
 }

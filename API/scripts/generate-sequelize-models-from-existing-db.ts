@@ -7,7 +7,10 @@ const host = process.env.RAFR_DB_HOST;
 
 const sequelizeAuto = new SequelizeAuto(databaseName, username, password, {
     host: host,
-    dialect: 'mysql'
+    dialect: 'mysql',
+    additional: {
+        timestamps: false
+    }
 });
 
 sequelizeAuto.run(error => {
