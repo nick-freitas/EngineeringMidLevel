@@ -6,9 +6,14 @@ export abstract class Controller {
     constructor(protected service: Service) {
     }
 
-    getMany(req, reply) {
-        let response = this.service.getMany();
-        reply(response);
+    async getMany(req, reply) {
+        try {
+            let response = await this.service.getMany();
+
+            reply(response);
+        } catch (err) {
+            console.error(err);
+        }
     }
 
     getOne(req, reply) {
