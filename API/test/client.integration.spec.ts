@@ -155,9 +155,24 @@ describe(`Client integration`, () => {
     });
 
     it('delete a client', async () => {
-        const clientId = 3;
-
         let response: any = await new Promise((resolve, reject) => {
+            request.post(`/clients`)
+                .send({
+                    name: `Client F - ${new Date().getMilliseconds()}`
+                })
+                .set('Accept', 'application/json')
+                .end((err, res) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    resolve(res);
+                });
+        });
+
+        const clientId = response.body.id;
+
+        response = await new Promise((resolve, reject) => {
             request.delete(`/clients/${clientId}`)
                 .end((err, res) => {
                     if (err) {
@@ -170,9 +185,6 @@ describe(`Client integration`, () => {
 
         expect(response.status, `Status is not 200`).to.equal(200);
         expect(response.body, `Body is not ok`).to.be.ok;
-        expect(response.body.id, `Id id not ok`).to.be.ok;
-        expect(response.body.id, `Id is not ${clientId}`).to.equal(clientId);
-        expect(response.body.name, `Name is not ok`).to.be.ok;
 
         response = await new Promise((resolve, reject) => {
             request.get(`/clients/${clientId}`)

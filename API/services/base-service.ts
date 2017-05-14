@@ -1,6 +1,7 @@
 import {injectable} from "inversify";
-import {DbSchema} from "../schema/db-schema";
 import * as assert from "assert";
+
+import {DbSchema} from "../schema/db-schema";
 
 @injectable()
 export abstract class Service {
@@ -49,5 +50,22 @@ export abstract class Service {
         assert(id, `Called destroy with no id`);
 
         return this.dbSchema.schema.destroy({where: {id: id}});
+    }
+
+    /**
+     * Updates a record in database
+     *
+     * @param id
+     * @param args
+     * @returns {Promise<void>}
+     */
+    async update(id, args) {
+        assert(id, `Called update with no id`);
+        assert(args, `Called update with no args`);
+
+        delete args.id;
+        assert(!args.id, `Could not remove id from args`);
+
+        return this.dbSchema.schema.update(args, {where: {id: id}, limit: 1});
     }
 }

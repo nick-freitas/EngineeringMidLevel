@@ -13,9 +13,9 @@ export abstract class Controller {
 
     async getMany(req, reply) {
         try {
-            let response = await this.service.getMany();
+            const record = await this.service.getMany();
 
-            reply(response);
+            reply(record);
         } catch (err) {
             console.error(err);
             reply(Boom.badImplementation(this.internalServerErrorMessage));
@@ -24,9 +24,12 @@ export abstract class Controller {
 
     async getOne(req, reply) {
         try {
-            let response = await this.service.getOne(req.params.id);
+            const record = await this.service.getOne(req.params.id);
+            if (!record) {
+                return reply(Boom.notFound(`Record not found`));
+            }
 
-            reply(response);
+            reply(record);
         } catch (err) {
             console.error(err);
             reply(Boom.badImplementation(this.internalServerErrorMessage));
@@ -35,9 +38,45 @@ export abstract class Controller {
 
     async create(req, reply) {
         try {
-            let response = await this.service.create(req.payload);
+            const record = await this.service.create(req.payload);
 
-            reply(response).code(201);
+            reply(record).code(201);
+        } catch (err) {
+            console.error(err);
+            reply(Boom.badImplementation(this.internalServerErrorMessage));
+        }
+    }
+
+    async destroy(req, reply) {
+        try {
+            const id = req.params.id;
+
+            const record = await this.service.getOne(id);
+            if (!record) {
+                return reply(Boom.notFound(`Record not found`));
+            }
+
+            await this.service.destroy(id);
+
+            reply(record);
+        } catch (err) {
+            console.error(err);
+            reply(Boom.badImplementation(this.internalServerErrorMessage));
+        }
+    }
+
+    async update(req, reply) {
+        try {
+            const id = req.params.id;
+
+            let record = await this.service.getOne(id);
+            if (!record) {
+                return reply(Boom.notFound(`Record not found`));
+            }
+
+            record = await this.service.update(id, req.payload);
+
+            reply(record);
         } catch (err) {
             console.error(err);
             reply(Boom.badImplementation(this.internalServerErrorMessage));
