@@ -4,6 +4,7 @@
     "inlineSources": true,
     "target": "es5",
     "noImplicitAny": false,
+    "outDir": "dist",
     "rootDir": ".",
     "module": "commonjs",
     "moduleResolution": "node",
