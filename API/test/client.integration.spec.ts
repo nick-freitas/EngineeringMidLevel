@@ -23,8 +23,6 @@ describe(`Client integration`, () => {
     });
 
     it('gets all clients', async () => {
-        const numberOfClientsInSeeder = 3;
-
         let response: any = await new Promise((resolve, reject) => {
             request.get(`/clients`)
                 .end((err, res) => {
@@ -39,7 +37,7 @@ describe(`Client integration`, () => {
         expect(response.status).to.equal(200);
         expect(response.body).to.be.ok;
         expect(response.body).to.be.instanceof(Array);
-        expect(response.body.length).to.equal(numberOfClientsInSeeder);
+        expect(response.body).to.not.be.empty;
     });
 
     it('gets a single client', async () => {
@@ -119,6 +117,7 @@ describe(`Client integration`, () => {
                 .send({
                     name: newClientName
                 })
+                .set('Accept', 'application/json')
                 .end((err, res) => {
                     if (err) {
                         return reject(err);
@@ -128,7 +127,7 @@ describe(`Client integration`, () => {
                 });
         });
 
-        expect(response.status, `Status is not 201`).to.equal(201);
+        expect(response.status, `Status is not 200`).to.equal(200);
         expect(response.body, `Body is not ok`).to.be.ok;
         expect(response.body.id, `Id is not ok`).to.be.ok;
         expect(response.body.id, `Id is not ${clientId}`).to.equal(clientId);

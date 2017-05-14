@@ -66,6 +66,8 @@ export abstract class Service {
         delete args.id;
         assert(!args.id, `Could not remove id from args`);
 
-        return this.dbSchema.schema.update(args, {where: {id: id}, limit: 1});
+        await this.dbSchema.schema.update(args, {where: {id: id}, limit: 1});
+
+        return this.getOne(id);
     }
 }

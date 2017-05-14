@@ -39,7 +39,7 @@ export class ClientRoute extends Route {
         this.server.route({
             method: 'PUT',
             path: `/clients/{id}`,
-            handler: (req, reply) => this.clientController.destroy(req, reply)
+            handler: (req, reply) => this.clientController.update(req, reply)
         });
     }
 }
