@@ -17,12 +17,12 @@ phases:
   pre_build:
     commands:
       - cd ./API/
-      - mysql -u root -ppassword < ./models/schema.sql
+      - mysql -u root -ppassword
       - cd ../
   build:
     commands:
       - cd ./API/
-      - npm tun generate-models
+      - npm run generate-models
       - cd ../
   post_build:
     commands:
