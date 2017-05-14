@@ -1,12 +1,13 @@
 import {injectable} from "inversify";
+import {DbSchema} from "../schema/db-schema";
 
 @injectable()
 export abstract class Service {
-    constructor() {
+    constructor(protected dbSchema: DbSchema) {
     }
 
     async getMany() {
-        return [42, 42, 42];
+        return this.dbSchema.schema.findAll();
     }
 
     async getOne(id) {

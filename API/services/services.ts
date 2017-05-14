@@ -1,9 +1,12 @@
 import {Service} from "./base-service";
-import {injectable} from "inversify";
+import {inject, injectable} from "inversify";
+import {iocTypes} from "../ioc-types";
+import {ClientDbSchema} from "../schema/client";
+
 
 @injectable()
 export class ClientService extends Service {
-    constructor() {
-        super();
+    constructor(@inject(iocTypes.ClientDbSchema) clientDbSchema: ClientDbSchema) {
+        super(clientDbSchema);
     }
 }
