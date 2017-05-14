@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+
 import {iocContainer, initializeBindings} from '../config/inversify.config';
 import {App} from "../app";
 import {iocTypes} from "../ioc-types";
@@ -42,8 +43,8 @@ describe(`Client integration`, () => {
     });
 
     it('gets a single client', async () => {
-        const clientId = 1;
-        const clientName = "Client A";
+        const clientId = 2;
+        const clientName = "Client B";
 
         let response: any = await new Promise((resolve, reject) => {
             request.get(`/clients/${clientId}`)
@@ -56,23 +57,23 @@ describe(`Client integration`, () => {
                 });
         });
 
-        expect(response.status).to.equal(200);
-        expect(response.body).to.be.ok;
-        expect(response.body.id).to.be.ok;
-        expect(response.body.id).to.equal(clientId);
-        expect(response.body.name).to.be.ok;
-        expect(response.body.name).to.equal(clientName);
+        expect(response.status, `Status is not 200`).to.equal(200);
+        expect(response.body, `Body is not ok`).to.be.ok;
+        expect(response.body.id, `Id is not ok`).to.be.ok;
+        expect(response.body.id, `Id is not ${clientId}`).to.equal(clientId);
+        expect(response.body.name, `Name is not ok`).to.be.ok;
+        expect(response.body.name, `Name is not ${clientName}`).to.equal(clientName);
     });
 
     it('creates a client', async () => {
-        const expectedClientId = 1;
-        const clientName = "Client D";
+        const clientName = `Client D - ${new Date().getMilliseconds()}`;
 
         let response: any = await new Promise((resolve, reject) => {
             request.post(`/clients`)
                 .send({
                     name: clientName
                 })
+                .set('Accept', 'application/json')
                 .end((err, res) => {
                     if (err) {
                         return reject(err);
@@ -82,15 +83,16 @@ describe(`Client integration`, () => {
                 });
         });
 
-        expect(response.status).to.equal(201);
-        expect(response.body).to.be.ok;
-        expect(response.body.id).to.be.ok;
-        expect(response.body.id).to.equal(expectedClientId);
-        expect(response.body.name).to.be.ok;
-        expect(response.body.name).to.equal(clientName);
+        expect(response.status, `Status is not 201`).to.equal(201);
+        expect(response.body, `Body is not ok`).to.be.ok;
+        expect(response.body.id, `Id is not ok`).to.be.ok;
+        expect(response.body.name, `Name is not ok`).to.be.ok;
+        expect(response.body.name, `Name is not ${clientName}`).to.equal(clientName);
+
+        const clientId = response.body.id;
 
         response = await new Promise((resolve, reject) => {
-            request.get(`/clients/${expectedClientId}`)
+            request.get(`/clients/${clientId}`)
                 .end((err, res) => {
                     if (err) {
                         return reject(err);
@@ -100,17 +102,17 @@ describe(`Client integration`, () => {
                 });
         });
 
-        expect(response.status).to.equal(200);
-        expect(response.body).to.be.ok;
-        expect(response.body.id).to.be.ok;
-        expect(response.body.id).to.equal(expectedClientId);
-        expect(response.body.name).to.be.ok;
-        expect(response.body.name).to.equal(clientName);
+        expect(response.status, `Status is not 200`).to.equal(200);
+        expect(response.body, `Body is not ok`).to.be.ok;
+        expect(response.body.id, `Id is not ok`).to.be.ok;
+        expect(response.body.id, `Id is not ${clientId}`).to.equal(clientId);
+        expect(response.body.name, `Name is not ok`).to.be.ok;
+        expect(response.body.name, `Name is not ${clientName}`).to.equal(clientName);
     });
 
     it('updates a client', async () => {
         const clientId = 1;
-        const newClientName = `Client D - ${new Date().getMilliseconds()}`;
+        const newClientName = `Client E - ${new Date().getMilliseconds()}`;
 
         let response: any = await new Promise((resolve, reject) => {
             request.put(`/clients/${clientId}`)
@@ -126,12 +128,12 @@ describe(`Client integration`, () => {
                 });
         });
 
-        expect(response.status).to.equal(201);
-        expect(response.body).to.be.ok;
-        expect(response.body.id).to.be.ok;
-        expect(response.body.id).to.equal(clientId);
-        expect(response.body.name).to.be.ok;
-        expect(response.body.name).to.equal(newClientName);
+        expect(response.status, `Status is not 201`).to.equal(201);
+        expect(response.body, `Body is not ok`).to.be.ok;
+        expect(response.body.id, `Id is not ok`).to.be.ok;
+        expect(response.body.id, `Id is not ${clientId}`).to.equal(clientId);
+        expect(response.body.name, `Name is not ok`).to.be.ok;
+        expect(response.body.name, `Name is not ${newClientName}`).to.equal(newClientName);
 
         response = await new Promise((resolve, reject) => {
             request.get(`/clients/${clientId}`)
@@ -144,12 +146,12 @@ describe(`Client integration`, () => {
                 });
         });
 
-        expect(response.status).to.equal(200);
-        expect(response.body).to.be.ok;
-        expect(response.body.id).to.be.ok;
-        expect(response.body.id).to.equal(clientId);
-        expect(response.body.name).to.be.ok;
-        expect(response.body.name).to.equal(newClientName);
+        expect(response.status, `Status is not 200`).to.equal(200);
+        expect(response.body, `Body is not ok`).to.be.ok;
+        expect(response.body.id, `Id is not ok`).to.be.ok;
+        expect(response.body.id, `Id is not ${clientId}`).to.equal(clientId);
+        expect(response.body.name, `Name is not ok`).to.be.ok;
+        expect(response.body.name, `Name is not ${newClientName}`).to.equal(newClientName);
     });
 
     it('delete a client', async () => {
@@ -166,11 +168,11 @@ describe(`Client integration`, () => {
                 });
         });
 
-        expect(response.status).to.equal(200);
-        expect(response.body).to.be.ok;
-        expect(response.body.id).to.be.ok;
-        expect(response.body.id).to.equal(clientId);
-        expect(response.body.name).to.be.ok;
+        expect(response.status, `Status is not 200`).to.equal(200);
+        expect(response.body, `Body is not ok`).to.be.ok;
+        expect(response.body.id, `Id id not ok`).to.be.ok;
+        expect(response.body.id, `Id is not ${clientId}`).to.equal(clientId);
+        expect(response.body.name, `Name is not ok`).to.be.ok;
 
         response = await new Promise((resolve, reject) => {
             request.get(`/clients/${clientId}`)
@@ -183,7 +185,6 @@ describe(`Client integration`, () => {
                 });
         });
 
-        expect(response.status).to.equal(404);
+        expect(response.status, `Response is not 404`).to.equal(404);
     });
-
 });
