@@ -2,10 +2,10 @@ version: 0.2
 
 env:
   variables:
-    RAFR_DB_HOST: "localhost"
-    RAFR_DB_NAME: "rafr"
-    RAFR_DB_USERNAME: "root"
-    RAFR_DB_PASSWORD: "password"
+    RDS_HOSTNAME: "localhost"
+    RDS_DB_NAME: "rafr"
+    RDS_USERNAME: "root"
+    RDS_PASSWORD: "password"
     NODE_ENV: "development"
 
 phases:
@@ -14,17 +14,3 @@ phases:
       - cd ./API/
       - npm install
       - cd ../
-  pre_build:
-    commands:
-      - cd ./API/
-      - mysql -u root -ppassword
-      - cd ../
-  build:
-    commands:
-      - cd ./API/
-      - npm run generate-models
-      - cd ../
-  post_build:
-    commands:
-      - cd ./API/
-      - npm start

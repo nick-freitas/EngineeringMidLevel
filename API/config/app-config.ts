@@ -27,10 +27,10 @@ export class AppConfig {
 
     private initializeDatabse() {
         this.database = {
-            name: process.env.RAFR_DB_NAME,
-            username: process.env.RAFR_DB_USERNAME,
-            password: process.env.RAFR_DB_PASSWORD,
-            host: process.env.RAFR_DB_HOST,
+            name: process.env.RDS_DB_NAME,
+            username: process.env.RDS_USERNAME,
+            password: process.env.RDS_PASSWORD,
+            host: process.env.RDS_HOSTNAME,
             dialect: "mysql",
             logging: console.log,
         };
