@@ -198,4 +198,66 @@ describe(`Client integration`, () => {
 
         expect(response.status, `Response is not 404`).to.equal(404);
     });
+
+    it('fails to update a client because there is no name', async () => {
+        const clientId = 1;
+
+        let response: any = await new Promise((resolve, reject) => {
+            request.put(`/clients/${clientId}`)
+                .end((err, res) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    resolve(res);
+                });
+        });
+
+        expect(response.status, `Status is not 400`).to.equal(400);
+    });
+
+    it('fails to create a client because there is no name', async () => {
+        let response: any = await new Promise((resolve, reject) => {
+            request.post(`/clients`)
+                .end((err, res) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    resolve(res);
+                });
+        });
+
+        expect(response.status, `Status is not 400`).to.equal(400);
+    });
+
+    it('fails to get one because id is bad', async () => {
+        const response: any = await new Promise((resolve, reject) => {
+            request.get(`/clients/undefined`)
+                .end((err, res) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    resolve(res);
+                });
+        });
+
+        expect(response.status, `Status is not 400`).to.equal(400);
+    });
+
+    it('fails to delete because id is bad', async () => {
+        const response: any = await new Promise((resolve, reject) => {
+            request.delete(`/clients/undefined`)
+                .end((err, res) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    resolve(res);
+                });
+        });
+
+        expect(response.status, `Status is not 400`).to.equal(400);
+    });
 });

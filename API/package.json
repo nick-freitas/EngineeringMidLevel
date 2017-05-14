@@ -15,6 +15,7 @@
     "hapi": "16.1.0",
     "immutable": "3.8.1",
     "inversify": "4.1.0",
+    "joi": "^10.4.2",
     "mysql": "^2.13.0",
     "reflect-metadata": "0.1.10",
     "sequelize": "^3.30.4"
