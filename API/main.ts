@@ -16,9 +16,17 @@ const app = new App(dbConnector, server, routes);
 
 // initialize app
 app.initializeApp()
-    .catch((err) => {
+    .catch(handleUncaughtError);
+
+process.on('uncaughtException', handleUncaughtError);
+process.on('unhandledRejection', (reason, promise) =>
+    console.warn(`Unhandled Rejection at: Promise ${promise}, reason: ${reason}`)
+);
+
+
+function handleUncaughtError(error) {
     // if there is an uncaught error log it and exit the application
-        // NOTE: exiting an application is really bad but this isn't gonna happen unless something really really catastrophic happens, at which point out best bet is to kill this node process and alert the process manager running it that we did. The manager will the take care of running a new process so we have no down time
-        console.error(err);
-        process.exit(-1);
-    });
+    // NOTE: exiting an application is really bad but this isn't gonna happen unless something really really catastrophic happens, at which point out best bet is to kill this node process and alert the process manager running it that we did. The manager will the take care of running a new process so we have no down time
+    console.error(error);
+    process.exit(-1);
+}
