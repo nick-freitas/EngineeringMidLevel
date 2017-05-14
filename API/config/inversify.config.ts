@@ -11,14 +11,21 @@ import {iocTypes} from "../ioc-types";
 import {ClientService} from "../services/services";
 import {ClientRoute} from "../routes/client";
 import {ClientController} from "../controllers/client";
+import {ClientDbSchema} from "../schema/client";
+import {DbSchema} from "../schema/db-schema";
 
 export const iocContainer = new Container();
 export function initializeBindings() {
     iocContainer.bind<AppConfig>(iocTypes.AppConfig).to(AppConfig);
     iocContainer.bind<DbConnector>(iocTypes.DbConnector).to(DbConnector).inSingletonScope();
     iocContainer.bind<Server>(iocTypes.Server).to(Server).inSingletonScope();
+
     iocContainer.bind<Routes>(iocTypes.Routes).to(Routes);
     iocContainer.bind<ClientService>(iocTypes.ClientService).to(ClientService);
+
     iocContainer.bind<ClientRoute>(iocTypes.ClientRoute).to(ClientRoute);
+
     iocContainer.bind<ClientController>(iocTypes.ClientController).to(ClientController);
+
+    iocContainer.bind<ClientDbSchema>(iocTypes.ClientDbSchema).to(ClientDbSchema);
 }

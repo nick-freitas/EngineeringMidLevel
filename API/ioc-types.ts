@@ -11,5 +11,7 @@ export const iocTypes = {
     Routes: Symbol("Routes"),
     ClientService: Symbol("ClientService"),
     ClientRoute: Symbol("ClientRoute"),
-    ClientController: Symbol("ClientController")
+    ClientController: Symbol("ClientController"),
+    ClientDbSchema: Symbol("ClientDbSchema"),
+    DbSchema: Symbol("DbSchema")
 };
