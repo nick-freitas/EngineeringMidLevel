@@ -12,7 +12,7 @@ import {ClientService} from "../services/services";
 import {ClientRoute} from "../routes/client";
 import {ClientController} from "../controllers/client";
 import {ClientDbSchema} from "../schema/client";
-import {DbSchema} from "../schema/db-schema";
+import {ClientValidator} from "../validators/client";
 
 export const iocContainer = new Container();
 export function initializeBindings() {
@@ -20,12 +20,19 @@ export function initializeBindings() {
     iocContainer.bind<DbConnector>(iocTypes.DbConnector).to(DbConnector).inSingletonScope();
     iocContainer.bind<Server>(iocTypes.Server).to(Server).inSingletonScope();
 
+    // Routes
     iocContainer.bind<Routes>(iocTypes.Routes).to(Routes);
-    iocContainer.bind<ClientService>(iocTypes.ClientService).to(ClientService);
-
     iocContainer.bind<ClientRoute>(iocTypes.ClientRoute).to(ClientRoute);
 
+    // Controllers
     iocContainer.bind<ClientController>(iocTypes.ClientController).to(ClientController);
 
+    // Validators
+    iocContainer.bind<ClientValidator>(iocTypes.ClientValidator).to(ClientValidator);
+
+    // Services
+    iocContainer.bind<ClientService>(iocTypes.ClientService).to(ClientService);
+
+    // Db Schemas
     iocContainer.bind<ClientDbSchema>(iocTypes.ClientDbSchema).to(ClientDbSchema);
 }

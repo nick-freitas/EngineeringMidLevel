@@ -13,5 +13,6 @@ export const iocTypes = {
     ClientRoute: Symbol("ClientRoute"),
     ClientController: Symbol("ClientController"),
     ClientDbSchema: Symbol("ClientDbSchema"),
-    DbSchema: Symbol("DbSchema")
+    DbSchema: Symbol("DbSchema"),
+    ClientValidator: Symbol("ClientValidator")
 };
