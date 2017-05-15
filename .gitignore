@@ -6,3 +6,6 @@ API/API.iml
 API/node_modules/
 API/models/*.js
 API/dist/
+
+/admin/admin.iml
+/admin/node_modules/
