@@ -11,12 +11,10 @@ export class AppConfig {
     }
 
     private initializeServer() {
-        const host = `localhost`;
         const portNumber = this.normalizePortNumber(process.env.PORT) || 3000;
 
         this.server = {
-            portNumber: portNumber,
-            host: host
+            portNumber: portNumber
         };
     }
 
@@ -44,7 +42,7 @@ export class AppConfig {
 
 interface ServerConfig {
     portNumber: number,
-    host: string
+    host?: string
 }
 
 interface DatabaseConfig {
