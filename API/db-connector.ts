@@ -1,8 +1,8 @@
-import * as Sequelize from "sequelize";
-import {inject, injectable} from "inversify";
+import * as Sequelize from 'sequelize';
+import {inject, injectable} from 'inversify';
 
-import {AppConfig} from "./config/app-config";
-import {iocTypes} from "./ioc-types";
+import {AppConfig} from './config/app-config';
+import {iocTypes} from './ioc-types';
 
 @injectable()
 export class DbConnector {
@@ -31,10 +31,8 @@ export class DbConnector {
     }
 
     private createConnection({dbName, dbUsername, dbPassword, dbHost, dbDialect, dbLogging}) {
-        return new Sequelize(dbName, dbUsername, dbPassword, {
-            host: dbHost,
-            dialect: dbDialect,
+        return new Sequelize(`${dbDialect}://${dbUsername}:${dbPassword}@${dbHost}/${dbName}`, {
             logging: dbLogging
-        })
+        });
     }
 }
