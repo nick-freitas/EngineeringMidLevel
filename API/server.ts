@@ -1,9 +1,9 @@
-import * as hapi from "hapi";
+import * as hapi from 'hapi';
 import * as good from 'good';
-import {inject, injectable} from "inversify";
+import {inject, injectable} from 'inversify';
 
-import {AppConfig} from "./config/app-config";
-import {iocTypes} from "./ioc-types";
+import {AppConfig} from './config/app-config';
+import {iocTypes} from './ioc-types';
 
 @injectable()
 export class Server {
@@ -25,7 +25,8 @@ export class Server {
         //set connection
         this.server.connection({
             host: this.appConfig.server.host,
-            port: this.appConfig.server.portNumber
+            port: this.appConfig.server.portNumber,
+            routes: {cors: true}
         });
 
         // add logging
