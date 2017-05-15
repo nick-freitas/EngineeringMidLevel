@@ -4,9 +4,11 @@ const username = process.env.RAFR_DB_USERNAME;
 const password = process.env.RAFR_DB_PASSWORD;
 const databaseName = process.env.RAFR_DB_NAME;
 const host = process.env.RAFR_DB_HOST;
+const port = process.env.RAFR_DB_PORT;
 
 const sequelizeAuto = new SequelizeAuto(databaseName, username, password, {
     host: host,
+    port: port,
     dialect: 'mysql',
     additional: {
         timestamps: false
