@@ -22,7 +22,8 @@ export class DbConnector {
             dbPassword: this.appConfig.database.password,
             dbHost: this.appConfig.database.host,
             dbDialect: this.appConfig.database.dialect,
-            dbLogging: this.appConfig.database.logging
+            dbLogging: this.appConfig.database.logging,
+            dbPort: this.appConfig.database.port
         };
 
         this._connection = this.createConnection(dbConnectionOptions);
