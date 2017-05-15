@@ -31,7 +31,7 @@ export class DbConnector {
     }
 
     private createConnection({dbName, dbUsername, dbPassword, dbHost, dbDialect, dbLogging}) {
-        return new Sequelize(`${dbDialect}://${dbUsername}:${dbPassword}@${dbHost}/${dbName}`, {
+        return new Sequelize(`${dbDialect}://${dbUsername}${dbPassword ? ':' + dbPassword : ''}@${dbHost}/${dbName}`, {
             logging: dbLogging
         });
     }
