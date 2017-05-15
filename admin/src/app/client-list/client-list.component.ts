@@ -10,11 +10,17 @@ import {Client} from '../client';
 })
 export class ClientListComponent implements OnInit {
   clientList: Observable<Client[]>;
+  createClientModel: { name?: string };
 
   constructor(private clientService: ClientService) {
+    this.createClientModel = {};
   }
 
   ngOnInit() {
     this.clientList = this.clientService.getClientList();
+  }
+
+  createClient() {
+    console.log(`Wants to create a client with name ${this.createClientModel.name}`);
   }
 }
