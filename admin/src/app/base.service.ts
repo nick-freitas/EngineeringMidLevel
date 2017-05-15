@@ -1,11 +1,11 @@
+import {environment} from '../../environment/environment'
 import {Observable} from 'rxjs/Observable';
 
 export abstract class BaseService {
   baseUrl: string;
 
   constructor() {
-    // this.baseUrl = `http://localhost:3000/api/`;
-    this.baseUrl = `http://ec2-54-82-207-216.compute-1.amazonaws.com:3000/api/`;
+    this.baseUrl = environment.apiUrl;
   }
 
   protected errorHandler(error: Response | any) {
