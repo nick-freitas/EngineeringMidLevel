@@ -1,3 +1,16 @@
-<p>
-  client-list works!
-</p>
+<div *ngIf="clientList | async; let clientList; else clientListNotLoaded">
+  <rafr-client-list-result *ngFor="let client of clientList"
+                           [client]="client"></rafr-client-list-result>
+</div>
+
+<ng-template #clientListNotLoaded>
+  <div class="card">
+    <div class="card-block">
+      <span i18n>Loading client list...</span>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated w-100" role="progressbar"
+             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>

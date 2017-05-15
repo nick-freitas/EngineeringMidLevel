@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
@@ -8,13 +8,20 @@ import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {ClientListComponent} from './client-list/client-list.component';
 import {ClientComponent} from './client/client.component';
+import {HeaderComponent} from './header/header.component';
+import {ClientService} from './client.service';
+import {ClientListResultComponent} from './client-list-result/client-list-result.component';
+import {FooterComponent} from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ClientListComponent,
-    ClientComponent
+    ClientComponent,
+    HeaderComponent,
+    ClientListResultComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -22,8 +29,11 @@ import {ClientComponent} from './client/client.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    ClientService
+  ],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
 }
