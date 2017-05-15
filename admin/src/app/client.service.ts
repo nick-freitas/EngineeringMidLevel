@@ -12,7 +12,7 @@ export class ClientService extends BaseService {
   constructor(private http: Http) {
     super();
 
-    this.clientListUrl = `/api/clients`;
+    this.clientListUrl = `${this.baseUrl}clients`;
   }
 
   getClientList(): Observable<Client[]> {
