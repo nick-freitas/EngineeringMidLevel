@@ -8,11 +8,16 @@ import {DbConnector} from "../db-connector";
 import {Server} from "../server";
 import {Routes} from "../routes/routes";
 import {iocTypes} from "../ioc-types";
-import {ClientService} from "../services/services";
+import {ClientService} from "../services/client";
 import {ClientRoute} from "../routes/client";
 import {ClientController} from "../controllers/client";
 import {ClientDbSchema} from "../schema/client";
 import {ClientValidator} from "../validators/client";
+import {ProductAreaRoute} from "../routes/product-area";
+import {ProductAreaController} from "../controllers/product-area";
+import {ProductAreaValidator} from "../validators/product-area";
+import {ProductAreaService} from "../services/product-area";
+import {ProductAreaDbSchema} from "../schema/product-area";
 
 export const iocContainer = new Container();
 export function initializeBindings() {
@@ -22,17 +27,18 @@ export function initializeBindings() {
 
     // Routes
     iocContainer.bind<Routes>(iocTypes.Routes).to(Routes);
+
+    // Client
     iocContainer.bind<ClientRoute>(iocTypes.ClientRoute).to(ClientRoute);
-
-    // Controllers
     iocContainer.bind<ClientController>(iocTypes.ClientController).to(ClientController);
-
-    // Validators
     iocContainer.bind<ClientValidator>(iocTypes.ClientValidator).to(ClientValidator);
-
-    // Services
     iocContainer.bind<ClientService>(iocTypes.ClientService).to(ClientService);
-
-    // Db Schemas
     iocContainer.bind<ClientDbSchema>(iocTypes.ClientDbSchema).to(ClientDbSchema);
+
+    // ProductArea
+    iocContainer.bind<ProductAreaRoute>(iocTypes.ProductAreaRoute).to(ProductAreaRoute);
+    iocContainer.bind<ProductAreaController>(iocTypes.ProductAreaController).to(ProductAreaController);
+    iocContainer.bind<ProductAreaValidator>(iocTypes.ProductAreaValidator).to(ProductAreaValidator);
+    iocContainer.bind<ProductAreaService>(iocTypes.ProductAreaService).to(ProductAreaService);
+    iocContainer.bind<ProductAreaDbSchema>(iocTypes.ProductAreaDbSchema).to(ProductAreaDbSchema);
 }

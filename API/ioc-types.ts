@@ -9,10 +9,17 @@ export const iocTypes = {
     DbConnector: Symbol("DbConnector"),
     Server: Symbol("Server"),
     Routes: Symbol("Routes"),
+    DbSchema: Symbol("DbSchema"),
+
     ClientService: Symbol("ClientService"),
     ClientRoute: Symbol("ClientRoute"),
     ClientController: Symbol("ClientController"),
     ClientDbSchema: Symbol("ClientDbSchema"),
-    DbSchema: Symbol("DbSchema"),
-    ClientValidator: Symbol("ClientValidator")
+    ClientValidator: Symbol("ClientValidator"),
+
+    ProductAreaService: Symbol("ProductAreaService"),
+    ProductAreaRoute: Symbol("ProductAreaRoute"),
+    ProductAreaController: Symbol("ProductAreaController"),
+    ProductAreaDbSchema: Symbol("ProductAreaDbSchema"),
+    ProductAreaValidator: Symbol("ProductAreaValidator")
 };
