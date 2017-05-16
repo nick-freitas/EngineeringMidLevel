@@ -1,0 +1,19 @@
+<div *ngIf="productAreaList | async; let productAreaList; else productAreaListNotLoaded">
+  <rafr-product-area-list-result *ngFor="let productArea of productAreaList"
+                           [productArea]="productArea"></rafr-product-area-list-result>
+  <button type="button" class="btn btn-primary btn-lg btn-block" routerLink="/create-product-area">
+    Create New Product Area
+  </button>
+</div>
+
+<ng-template #productAreaListNotLoaded>
+  <div class="card">
+    <div class="card-block">
+      <span i18n>Loading productArea list...</span>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated w-100" role="progressbar"
+             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>

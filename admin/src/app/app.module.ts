@@ -13,6 +13,11 @@ import {ClientService} from './client.service';
 import {ClientListResultComponent} from './client-list-result/client-list-result.component';
 import {FooterComponent} from './footer/footer.component';
 import { CreateClientComponent } from './create-client/create-client.component';
+import { CreateProductAreaComponent } from './create-product-area/create-product-area.component';
+import { ProductAreaListResultComponent } from './product-area-list-result/product-area-list-result.component';
+import { ProductAreaListComponent } from './product-area-list/product-area-list.component';
+import { ProductAreaComponent } from './product-area/product-area.component';
+import {ProductAreaService} from "./product-area.service";
 
 @NgModule({
   declarations: [
@@ -23,7 +28,11 @@ import { CreateClientComponent } from './create-client/create-client.component';
     HeaderComponent,
     ClientListResultComponent,
     FooterComponent,
-    CreateClientComponent
+    CreateClientComponent,
+    CreateProductAreaComponent,
+    ProductAreaListResultComponent,
+    ProductAreaListComponent,
+    ProductAreaComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +41,8 @@ import { CreateClientComponent } from './create-client/create-client.component';
     AppRoutingModule
   ],
   providers: [
-    ClientService
+    ClientService,
+    ProductAreaService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
