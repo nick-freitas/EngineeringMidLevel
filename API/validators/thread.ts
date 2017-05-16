@@ -3,20 +3,23 @@ import {Validator} from "./base-validator";
 import {injectable} from "inversify";
 
 @injectable()
-export class ProductAreaValidator extends Validator {
+export class ThreadValidator extends Validator {
     namePayloadValidation;
+    featurePayloadValidation;
 
     constructor() {
         super();
 
         this.namePayloadValidation = Joi.string().min(1).max(255);
+        this.featurePayloadValidation = Joi.number().integer().min(1);
     }
 
     createValidation() {
         const genericValidation = super.createValidation();
         const specificValidation = {
             payload: {
-                name: this.namePayloadValidation.required()
+                name: this.namePayloadValidation.required(),
+                feature: this.featurePayloadValidation.required()
             }
         };
 
@@ -27,7 +30,8 @@ export class ProductAreaValidator extends Validator {
         const genericValidation = super.updateValidation();
         const specificValidation = {
             payload: {
-                name: this.namePayloadValidation
+                name: this.namePayloadValidation,
+                feature: this.featurePayloadValidation
             }
         };
 

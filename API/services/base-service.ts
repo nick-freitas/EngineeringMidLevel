@@ -59,7 +59,7 @@ export abstract class Service {
      * @param args
      * @returns {Promise<void>}
      */
-    async update(id, args) {
+    async update(id, args): Promise<any> {
         assert(id, `Called update with no id`);
         assert(args, `Called update with no args`);
 

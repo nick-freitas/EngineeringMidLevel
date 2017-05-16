@@ -9,14 +9,14 @@ export class ClientValidator extends Validator {
     constructor() {
         super();
 
-        this.namePayloadValidation = Joi.string().min(1).max(255).required();
+        this.namePayloadValidation = Joi.string().min(1).max(255);
     }
 
     createValidation() {
         const genericValidation = super.createValidation();
         const specificValidation = {
             payload: {
-                name: this.namePayloadValidation
+                name: this.namePayloadValidation.required()
             }
         };
 
