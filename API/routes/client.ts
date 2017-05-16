@@ -16,13 +16,13 @@ export class ClientRoute extends Route {
     addRoutes(): void {
         this.server.route({
             method: 'GET',
-            path: `/api/clients`,
+            path: `/clients`,
             handler: (req, reply) => this.clientController.getMany(req, reply)
         });
 
         this.server.route({
             method: 'GET',
-            path: `/api/clients/{id}`,
+            path: `/clients/{id}`,
             handler: (req, reply) => this.clientController.getOne(req, reply),
             config: {
                 validate: this.clientValidator.getOneValidation()
@@ -31,7 +31,7 @@ export class ClientRoute extends Route {
 
         this.server.route({
             method: 'DELETE',
-            path: `/api/clients/{id}`,
+            path: `/clients/{id}`,
             handler: (req, reply) => this.clientController.destroy(req, reply),
             config: {
                 validate: this.clientValidator.destroyValidation()
@@ -40,7 +40,7 @@ export class ClientRoute extends Route {
 
         this.server.route({
             method: 'POST',
-            path: `/api/clients`,
+            path: `/clients`,
             handler: (req, reply) => this.clientController.create(req, reply),
             config: {
                 validate: this.clientValidator.createValidation()
@@ -49,7 +49,7 @@ export class ClientRoute extends Route {
 
         this.server.route({
             method: 'PUT',
-            path: `/api/clients/{id}`,
+            path: `/clients/{id}`,
             handler: (req, reply) => this.clientController.update(req, reply),
             config: {
                 validate: this.clientValidator.updateValidation()

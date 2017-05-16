@@ -1,6 +1,9 @@
 <div *ngIf="clientList | async; let clientList; else clientListNotLoaded">
   <rafr-client-list-result *ngFor="let client of clientList"
                            [client]="client"></rafr-client-list-result>
+  <button type="button" class="btn btn-primary btn-lg btn-block" routerLink="/create-client">
+    Create New Client
+  </button>
 </div>
 
 <ng-template #clientListNotLoaded>

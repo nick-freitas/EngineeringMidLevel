@@ -24,7 +24,7 @@ describe(`Client integration`, () => {
 
     it('gets all clients', async () => {
         let response: any = await new Promise((resolve, reject) => {
-            request.get(`/api/clients`)
+            request.get(`/clients`)
                 .end((err, res) => {
                     if (err) {
                         return reject(err);
@@ -45,7 +45,7 @@ describe(`Client integration`, () => {
         const clientName = "Client B";
 
         let response: any = await new Promise((resolve, reject) => {
-            request.get(`/api/clients/${clientId}`)
+            request.get(`/clients/${clientId}`)
                 .end((err, res) => {
                     if (err) {
                         return reject(err);
@@ -67,7 +67,7 @@ describe(`Client integration`, () => {
         const clientName = `Client D - ${new Date().getMilliseconds()}`;
 
         let response: any = await new Promise((resolve, reject) => {
-            request.post(`/api/clients`)
+            request.post(`/clients`)
                 .send({
                     name: clientName
                 })
@@ -90,7 +90,7 @@ describe(`Client integration`, () => {
         const clientId = response.body.id;
 
         response = await new Promise((resolve, reject) => {
-            request.get(`/api/clients/${clientId}`)
+            request.get(`/clients/${clientId}`)
                 .end((err, res) => {
                     if (err) {
                         return reject(err);
@@ -113,7 +113,7 @@ describe(`Client integration`, () => {
         const newClientName = `Client E - ${new Date().getMilliseconds()}`;
 
         let response: any = await new Promise((resolve, reject) => {
-            request.put(`/api/clients/${clientId}`)
+            request.put(`/clients/${clientId}`)
                 .send({
                     name: newClientName
                 })
@@ -135,7 +135,7 @@ describe(`Client integration`, () => {
         expect(response.body.name, `Name is not ${newClientName}`).to.equal(newClientName);
 
         response = await new Promise((resolve, reject) => {
-            request.get(`/api/clients/${clientId}`)
+            request.get(`/clients/${clientId}`)
                 .end((err, res) => {
                     if (err) {
                         return reject(err);
@@ -155,7 +155,7 @@ describe(`Client integration`, () => {
 
     it('delete a client', async () => {
         let response: any = await new Promise((resolve, reject) => {
-            request.post(`/api/clients`)
+            request.post(`/clients`)
                 .send({
                     name: `Client F - ${new Date().getMilliseconds()}`
                 })
@@ -172,7 +172,7 @@ describe(`Client integration`, () => {
         const clientId = response.body.id;
 
         response = await new Promise((resolve, reject) => {
-            request.delete(`/api/clients/${clientId}`)
+            request.delete(`/clients/${clientId}`)
                 .end((err, res) => {
                     if (err) {
                         return reject(err);
@@ -186,7 +186,7 @@ describe(`Client integration`, () => {
         expect(response.body, `Body is not ok`).to.be.ok;
 
         response = await new Promise((resolve, reject) => {
-            request.get(`/api/clients/${clientId}`)
+            request.get(`/clients/${clientId}`)
                 .end((err, res) => {
                     if (err) {
                         return reject(err);
@@ -203,7 +203,7 @@ describe(`Client integration`, () => {
         const clientId = 1;
 
         let response: any = await new Promise((resolve, reject) => {
-            request.put(`/api/clients/${clientId}`)
+            request.put(`/clients/${clientId}`)
                 .end((err, res) => {
                     if (err) {
                         return reject(err);
@@ -218,7 +218,7 @@ describe(`Client integration`, () => {
 
     it('fails to create a client because there is no name', async () => {
         let response: any = await new Promise((resolve, reject) => {
-            request.post(`/api/clients`)
+            request.post(`/clients`)
                 .end((err, res) => {
                     if (err) {
                         return reject(err);
@@ -233,7 +233,7 @@ describe(`Client integration`, () => {
 
     it('fails to get one because id is bad', async () => {
         const response: any = await new Promise((resolve, reject) => {
-            request.get(`/api/clients/undefined`)
+            request.get(`/clients/undefined`)
                 .end((err, res) => {
                     if (err) {
                         return reject(err);
@@ -248,7 +248,7 @@ describe(`Client integration`, () => {
 
     it('fails to delete because id is bad', async () => {
         const response: any = await new Promise((resolve, reject) => {
-            request.delete(`/api/clients/undefined`)
+            request.delete(`/clients/undefined`)
                 .end((err, res) => {
                     if (err) {
                         return reject(err);

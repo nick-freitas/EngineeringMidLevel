@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ClientService} from '../client.service';
-import {Observable} from 'rxjs/Observable';
-import {Client} from '../client';
+import {Component, OnInit} from "@angular/core";
+import {ClientService} from "../client.service";
+import {Observable} from "rxjs/Observable";
+import {Client} from "../client";
 
 @Component({
   selector: 'rafr-client-list',

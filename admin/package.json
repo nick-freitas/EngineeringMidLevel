@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json",
-    "build": "ng build",
+    "start": "ng serve",
+    "build": "ng build --prod -bh http://rafr-admin.s3-website-us-east-1.amazonaws.com/ -d http://rafr-admin.s3-website-us-east-1.amazonaws.com/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

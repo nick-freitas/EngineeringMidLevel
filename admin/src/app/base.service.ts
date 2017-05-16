@@ -1,7 +1,11 @@
+import {environment} from '../../environment/environment'
 import {Observable} from 'rxjs/Observable';
 
 export abstract class BaseService {
+  baseUrl: string;
+
   constructor() {
+    this.baseUrl = environment.apiUrl;
   }
 
   protected errorHandler(error: Response | any) {
