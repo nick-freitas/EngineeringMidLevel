@@ -1,4 +1,4 @@
-import {environment} from '../../environment/environment'
+import {environment} from '../environments/environment';
 import {Observable} from 'rxjs/Observable';
 
 export abstract class BaseService {
