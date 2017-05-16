@@ -21,5 +21,23 @@ export const iocTypes = {
     ProductAreaRoute: Symbol("ProductAreaRoute"),
     ProductAreaController: Symbol("ProductAreaController"),
     ProductAreaDbSchema: Symbol("ProductAreaDbSchema"),
-    ProductAreaValidator: Symbol("ProductAreaValidator")
+    ProductAreaValidator: Symbol("ProductAreaValidator"),
+
+    FeatureService: Symbol("FeatureService"),
+    FeatureRoute: Symbol("FeatureRoute"),
+    FeatureController: Symbol("FeatureController"),
+    FeatureDbSchema: Symbol("FeatureDbSchema"),
+    FeatureValidator: Symbol("FeatureValidator"),
+
+    PostService: Symbol("PostService"),
+    PostRoute: Symbol("PostRoute"),
+    PostController: Symbol("PostController"),
+    PostDbSchema: Symbol("PostDbSchema"),
+    PostValidator: Symbol("PostValidator"),
+
+    ThreadService: Symbol("ThreadService"),
+    ThreadRoute: Symbol("ThreadRoute"),
+    ThreadController: Symbol("ThreadController"),
+    ThreadDbSchema: Symbol("ThreadDbSchema"),
+    ThreadValidator: Symbol("ThreadValidator")
 };
