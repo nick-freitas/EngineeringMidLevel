@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node -r ts-node/register ./main",
+    "start-prod": "nodejs -r ts-node/register ./main",
     "generate-models": "node -r ts-node/register ./scripts/generate-sequelize-models-from-existing-db",
+    "generate-models-prod": "nodejs -r ts-node/register ./scripts/generate-sequelize-models-from-existing-db",
     "test": "node ./node_modules/mocha/bin/_mocha --require ts-node/register --ui bdd --timeout 10000 test/*.spec.ts"
   },
   "dependencies": {
