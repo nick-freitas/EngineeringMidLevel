@@ -10,6 +10,8 @@ export class ClientService extends BaseService {
   private getClientListUrl: () => string;
   private getClientUrl: (id) => string;
   private createClientUrl: () => string;
+  private updateClientUrl: (id) => string;
+  private destroyClientUrl: (id) => string;
 
   constructor(private http: Http) {
     super();
@@ -17,6 +19,8 @@ export class ClientService extends BaseService {
     this.getClientListUrl = () => `${this.baseUrl}clients`;
     this.getClientUrl = (id: number) => `${this.baseUrl}clients/${id}`;
     this.createClientUrl = () => `${this.baseUrl}clients`;
+    this.updateClientUrl = (id) => `${this.baseUrl}clients/${id}`;
+    this.destroyClientUrl = (id) => `${this.baseUrl}clients/${id}`;
   }
 
   getClientList(): Observable<Client[]> {
@@ -46,6 +50,25 @@ export class ClientService extends BaseService {
 
         return new Client(resClient.id, resClient.name);
       })
+      .catch(this.errorHandler);
+  }
+
+  updateClient(id, _client): Observable<Client> {
+    const client = Object.assign({}, _client);
+    delete client.id;
+
+    return this.http.put(this.updateClientUrl(id), client)
+      .map(res => {
+        const resClient = res.json() || {};
+
+        return new Client(resClient.id, resClient.name);
+      })
+      .catch(this.errorHandler);
+  }
+
+  destroyClient(id): Observable<void> {
+    return this.http.delete(this.destroyClientUrl(id))
+      .map(res => res.json())
       .catch(this.errorHandler);
   }
 }
