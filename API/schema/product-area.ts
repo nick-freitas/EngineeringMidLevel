@@ -10,6 +10,6 @@ export class ProductAreaDbSchema extends DbSchema {
     }
 
     getModel() {
-        return `../models/product-area`;
+        return `../models/productArea`;
     }
 }
