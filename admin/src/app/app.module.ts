@@ -12,6 +12,7 @@ import {HeaderComponent} from './header/header.component';
 import {ClientService} from './client.service';
 import {ClientListResultComponent} from './client-list-result/client-list-result.component';
 import {FooterComponent} from './footer/footer.component';
+import { CreateClientComponent } from './create-client/create-client.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {FooterComponent} from './footer/footer.component';
     ClientComponent,
     HeaderComponent,
     ClientListResultComponent,
-    FooterComponent
+    FooterComponent,
+    CreateClientComponent
   ],
   imports: [
     BrowserModule,

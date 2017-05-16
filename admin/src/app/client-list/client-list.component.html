@@ -1,9 +1,8 @@
 <div *ngIf="clientList | async; let clientList; else clientListNotLoaded">
   <rafr-client-list-result *ngFor="let client of clientList"
                            [client]="client"></rafr-client-list-result>
-  <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#createClientModal">
-    Add
-    New Client
+  <button type="button" class="btn btn-primary btn-lg btn-block" routerLink="/create-client">
+    Create New Client
   </button>
 </div>
 
@@ -18,31 +17,3 @@
     </div>
   </div>
 </ng-template>
-
-<div class="modal fade" id="createClientModal" tabindex="-1" role="dialog" aria-labelledby="createClientLabel"
-     aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <form (ngSubmit)="createClient()" #createClientForm="ngForm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="createClientLabel">Create Client</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter name"
-                   [(ngModel)]="createClientModel.name" required>
-            <small id="nameHelp" class="form-text text-muted">The client's name</small>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Create</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
