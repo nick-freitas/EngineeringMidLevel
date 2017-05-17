@@ -10,3 +10,7 @@ API/dist/
 /admin/admin.iml
 /admin/node_modules/
 /admin/dist/
+
+/feature/app.iml
+/feature/node_modules/
+/feature/dist/
