@@ -1,0 +1,16 @@
+<div class="jumbotron">
+  <h1 class="display-3" i18n>Welcome to the Really Awesome Feature Requests!</h1>
+  <hr class="my-4">
+  <div *ngIf="auth.isAuthenticated | async; else notAuthenticated">
+    Check out the feature requests in the menu
+  </div>
+  <ng-template #notAuthenticated>
+    <p i18n>Please sign in above to continue</p>
+  </ng-template>
+  <p class="lead">
+    <a class="btn btn-outline-success btn-lg" role="button" i18n
+       href="http://rafr-admin.s3-website-us-east-1.amazonaws.com/">Go to admin</a>
+    <a class="btn btn-outline-primary btn-lg" href="https://github.com/nick-freitas/ReallyAwesomeFeatureRequests"
+       role="button" i18n>Go to GitHub</a>
+  </p>
+</div>
