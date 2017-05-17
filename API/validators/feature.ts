@@ -6,7 +6,7 @@ import {injectable} from "inversify";
 export class FeatureValidator extends Validator {
     titlePayloadValidation;
     descriptionPayloadValidation;
-    clientPropertyPayloadValidation;
+    clientPriorityPayloadValidation;
     targetDatePayloadValidation;
     ticketUrlPayloadValidation;
     ClientPayloadValidation;
@@ -18,8 +18,8 @@ export class FeatureValidator extends Validator {
 
         this.titlePayloadValidation = Joi.string().min(1).max(255);
         this.descriptionPayloadValidation = Joi.string().min(1);
-        this.clientPropertyPayloadValidation = Joi.number().integer().min(1);
-        this.targetDatePayloadValidation = Joi.date.min('now');
+        this.clientPriorityPayloadValidation = Joi.number().integer().min(1);
+        this.targetDatePayloadValidation = Joi.date().min('now');
         this.ticketUrlPayloadValidation = Joi.string().min(1).max(255);
         this.ClientPayloadValidation = Joi.number().integer().min(1);
         this.productAreaPayloadValidation = Joi.number().integer().min(1);
@@ -32,12 +32,11 @@ export class FeatureValidator extends Validator {
             payload: {
                 title: this.titlePayloadValidation.required(),
                 description: this.descriptionPayloadValidation.required(),
-                clientProperty: this.clientPropertyPayloadValidation.required(),
+                clientPriority: this.clientPriorityPayloadValidation.required(),
                 targetDate: this.targetDatePayloadValidation.required(),
                 ticketUrl: this.ticketUrlPayloadValidation.required(),
-                Client: this.ClientPayloadValidation.required(),
-                productArea: this.productAreaPayloadValidation.required(),
-                status: this.statusPayloadValidation.required()
+                client: this.ClientPayloadValidation.required(),
+                productArea: this.productAreaPayloadValidation.required()
             }
         };
 
@@ -50,12 +49,11 @@ export class FeatureValidator extends Validator {
             payload: {
                 title: this.titlePayloadValidation,
                 description: this.descriptionPayloadValidation,
-                clientProperty: this.clientPropertyPayloadValidation,
+                clientPriority: this.clientPriorityPayloadValidation,
                 targetDate: this.targetDatePayloadValidation,
                 ticketUrl: this.ticketUrlPayloadValidation,
-                Client: this.ClientPayloadValidation,
-                productArea: this.productAreaPayloadValidation,
-                status: this.statusPayloadValidation
+                client: this.ClientPayloadValidation,
+                productArea: this.productAreaPayloadValidation
             }
         };
 
