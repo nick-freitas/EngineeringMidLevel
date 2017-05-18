@@ -33,12 +33,18 @@ import {ThreadController} from "../controllers/thread";
 import {ThreadValidator} from "../validators/thread";
 import {ThreadService} from "../services/thread";
 import {ThreadDbSchema} from "../schema/thread";
+import {App} from "../app";
 
-export const iocContainer = new Container();
+export const iocContainer = new Container({defaultScope: "Singleton"});
 export function initializeBindings() {
+    if (iocContainer.isBound(iocTypes.App)) {
+        return;
+    }
+
     iocContainer.bind<AppConfig>(iocTypes.AppConfig).to(AppConfig);
-    iocContainer.bind<DbConnector>(iocTypes.DbConnector).to(DbConnector).inSingletonScope();
-    iocContainer.bind<Server>(iocTypes.Server).to(Server).inSingletonScope();
+    iocContainer.bind<DbConnector>(iocTypes.DbConnector).to(DbConnector);
+    iocContainer.bind<Server>(iocTypes.Server).to(Server);
+    iocContainer.bind<App>(iocTypes.App).to(App);
 
     // Routes
     iocContainer.bind<Routes>(iocTypes.Routes).to(Routes);

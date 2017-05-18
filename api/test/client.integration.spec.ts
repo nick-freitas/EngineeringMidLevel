@@ -3,9 +3,6 @@ import {expect} from 'chai';
 import {iocContainer, initializeBindings} from '../config/inversify.config';
 import {App} from "../app";
 import {iocTypes} from "../ioc-types";
-import {Routes} from "../routes/routes";
-import {DbConnector} from "../db-connector";
-import {Server} from "../server";
 
 describe(`Client integration`, () => {
     let request = null;
@@ -13,10 +10,7 @@ describe(`Client integration`, () => {
     before(async () => {
         initializeBindings();
 
-        const dbConnector = iocContainer.get<DbConnector>(iocTypes.DbConnector);
-        const server = iocContainer.get<Server>(iocTypes.Server);
-        const route = iocContainer.get<Routes>(iocTypes.Routes);
-        const app = new App(dbConnector, server, route);
+        const app = iocContainer.get<App>(iocTypes.App);
         await app.initializeApp();
 
         request = require('supertest')(app.server.server.listener);

@@ -6,16 +6,9 @@ import {iocTypes} from './ioc-types';
 
 @injectable()
 export class DbConnector {
-    private _connection;
+    connection;
 
     constructor(@inject(iocTypes.AppConfig) private appConfig: AppConfig) {
-    }
-
-    get connection() {
-        if (this._connection) {
-            return this._connection;
-        }
-
         const dbConnectionOptions = {
             dbName: this.appConfig.database.name,
             dbUsername: this.appConfig.database.username,
@@ -26,8 +19,7 @@ export class DbConnector {
             dbPort: this.appConfig.database.port
         };
 
-        this._connection = this.createConnection(dbConnectionOptions);
-        return this._connection;
+        this.connection = this.createConnection(dbConnectionOptions);
     }
 
     private createConnection({dbName, dbUsername, dbPassword, dbHost, dbDialect, dbLogging}) {

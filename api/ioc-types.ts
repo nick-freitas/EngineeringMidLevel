@@ -5,6 +5,7 @@
  * @type {{}}
  */
 export const iocTypes = {
+    App: Symbol("App"),
     AppConfig: Symbol("AppConfig"),
     DbConnector: Symbol("DbConnector"),
     Server: Symbol("Server"),

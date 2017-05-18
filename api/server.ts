@@ -1,27 +1,25 @@
-import * as hapi from 'hapi';
-import * as good from 'good';
-import {inject, injectable} from 'inversify';
+import * as hapi from "hapi";
+import * as good from "good";
+import {inject, injectable} from "inversify";
 
-import {AppConfig} from './config/app-config';
-import {iocTypes} from './ioc-types';
+import {AppConfig} from "./config/app-config";
+import {iocTypes} from "./ioc-types";
 
 @injectable()
 export class Server {
-    private _server;
+    server;
+    initialized: boolean;
 
     constructor(@inject(iocTypes.AppConfig) private appConfig: AppConfig) {
-    }
-
-    get server() {
-        if (this._server) {
-            return this._server;
-        }
-
-        this._server = new hapi.Server();
-        return this._server;
+        this.server = new hapi.Server();
     }
 
     public async initializeServer() {
+        if(this.initialized){
+            return;
+        }
+        this.initialized = true;
+
         //set connection
         this.server.connection({
             host: this.appConfig.server.host,

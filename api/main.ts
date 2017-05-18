@@ -1,18 +1,12 @@
 import {initializeBindings, iocContainer} from "./config/inversify.config";
 import {App} from "./app";
-import {DbConnector} from "./db-connector";
-import {Server} from "./server";
-import {Routes} from "./routes/routes";
 import {iocTypes} from "./ioc-types";
 
 // initialize the ioc bindings so we can inject properly
 initializeBindings();
 
 // create instance of app and inject dependencies
-const dbConnector = iocContainer.get<DbConnector>(iocTypes.DbConnector);
-const server = iocContainer.get<Server>(iocTypes.Server);
-const routes = iocContainer.get<Routes>(iocTypes.Routes);
-const app = new App(dbConnector, server, routes);
+const app = iocContainer.get<App>(iocTypes.App);
 
 // initialize app
 app.initializeApp()
@@ -22,7 +16,6 @@ process.on('uncaughtException', handleUncaughtError);
 process.on('unhandledRejection', (reason, promise) =>
     console.warn(`Unhandled Rejection at: Promise ${promise}, reason: ${reason}`)
 );
-
 
 function handleUncaughtError(error) {
     // if there is an uncaught error log it and exit the application
