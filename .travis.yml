@@ -6,15 +6,15 @@ env:
 services:
   - mysql
 install:
-  - cd ./API/
+  - cd ./api/
   - npm install
   - cd ../
 before_script:
-  - cd ./API/
+  - cd ./api/
   - mysql -u root < ./models/schema.sql
   - cd ../
 script:
-  - cd ./API/
+  - cd ./api/
   - npm run generate-models
   - npm test
   - cd ../
