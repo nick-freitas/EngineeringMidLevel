@@ -1,8 +1,10 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
-import {ClientListComponent} from './client-list.component';
-import {ClientService} from '../client.service';
-import {HttpModule} from '@angular/http';
+import {ClientListComponent} from "./client-list.component";
+import {ClientService} from "../client.service";
+import {HttpModule} from "@angular/http";
+import {ClientListResultComponent} from "../client-list-result/client-list-result.component";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('ClientListComponent', () => {
   let component: ClientListComponent;
@@ -10,8 +12,8 @@ describe('ClientListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpModule],
-      declarations: [ClientListComponent],
+      imports: [RouterTestingModule, HttpModule],
+      declarations: [ClientListComponent, ClientListResultComponent],
       providers: [ClientService]
     })
       .compileComponents();

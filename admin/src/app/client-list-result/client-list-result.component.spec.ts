@@ -1,6 +1,8 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ClientListResultComponent} from './client-list-result.component';
+import {RouterTestingModule} from "@angular/router/testing";
+import {HttpModule} from "@angular/http";
 
 describe('ClientListResultComponent', () => {
   let component: ClientListResultComponent;
@@ -8,6 +10,10 @@ describe('ClientListResultComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        HttpModule
+      ],
       declarations: [ClientListResultComponent]
     })
       .compileComponents();

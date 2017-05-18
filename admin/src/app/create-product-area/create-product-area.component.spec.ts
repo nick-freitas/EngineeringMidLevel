@@ -1,6 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
-import { CreateProductAreaComponent } from './create-product-area.component';
+import {CreateProductAreaComponent} from "./create-product-area.component";
+import {FormsModule} from "@angular/forms";
+import {ProductAreaService} from "../product-area.service";
 
 describe('CreateProductAreaComponent', () => {
   let component: CreateProductAreaComponent;
@@ -8,9 +10,11 @@ describe('CreateProductAreaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateProductAreaComponent ]
+      imports: [FormsModule],
+      declarations: [CreateProductAreaComponent],
+      providers: [ProductAreaService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
