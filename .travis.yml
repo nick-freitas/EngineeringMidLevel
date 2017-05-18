@@ -8,6 +8,10 @@ services:
 install:
   - cd ./api/
   - npm install
+  - cd ../admin/
+  - npm install
+  - cd ../feature/
+  - npm install
   - cd ../
 before_script:
   - cd ./api/
@@ -17,4 +21,8 @@ script:
   - cd ./api/
   - npm run generate-models
   - npm test
+  - cd ../admin
+  - npm run build
+  - cd ../feature
+  - npm run build
   - cd ../
