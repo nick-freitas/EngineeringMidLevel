@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4200",
     "build": "ng build --prod -bh http://rafr-admin.s3-website-us-east-1.amazonaws.com/ -d http://rafr-admin.s3-website-us-east-1.amazonaws.com/",
     "test": "ng test",
     "lint": "ng lint",
@@ -29,6 +29,7 @@
   "devDependencies": {
     "@angular/cli": "1.0.3",
     "@angular/compiler-cli": "^4.0.0",
+    "@angular/language-service": "4.1.3",
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.73",
     "codelyzer": "~2.0.0",
@@ -43,6 +44,6 @@
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
-    "typescript": "~2.2.0"
+    "typescript": "~2.3.0"
   }
 }
