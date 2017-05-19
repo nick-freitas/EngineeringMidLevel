@@ -14,7 +14,6 @@ export class ThreadRoute extends Route {
     }
 
     addRoutes(): void {
-        //todo add route controlle serivc for get threads for feature X
         this.server.route({
             method: 'GET',
             path: `/threads`,
@@ -54,6 +53,15 @@ export class ThreadRoute extends Route {
             handler: (req, reply) => this.threadController.update(req, reply),
             config: {
                 validate: this.threadValidator.updateValidation()
+            }
+        });
+
+        this.server.route({
+            method: 'GET',
+            path: `/features/{id}/threads`,
+            handler: (req, reply) => this.threadController.getManyForFeature(req, reply),
+            config: {
+                validate: this.threadValidator.getManyForFeatureValidation()
             }
         });
     }

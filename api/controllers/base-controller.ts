@@ -13,9 +13,9 @@ export abstract class Controller {
 
     async getMany(req, reply) {
         try {
-            const record = await this.service.getMany();
+            const records = await this.service.getMany();
 
-            reply(record);
+            reply(records);
         } catch (err) {
             console.error(err);
             reply(Boom.badImplementation(this.internalServerErrorMessage));

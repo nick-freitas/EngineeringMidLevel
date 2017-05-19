@@ -14,7 +14,6 @@ export class FeatureRoute extends Route {
     }
 
     addRoutes(): void {
-        // todo add route to close feature request
         this.server.route({
             method: 'GET',
             path: `/features`,

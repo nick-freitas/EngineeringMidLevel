@@ -6,8 +6,8 @@ import * as Boom from "boom";
 
 @injectable()
 export class FeatureController extends Controller {
-    constructor(@inject(iocTypes.FeatureService) service: FeatureService) {
-        super(service);
+    constructor(@inject(iocTypes.FeatureService) private featureService: FeatureService) {
+        super(featureService);
     }
 
     async close(req, reply) {
@@ -23,7 +23,7 @@ export class FeatureController extends Controller {
                 return reply(Boom.badRequest(`Record isn't open`));
             }
 
-            record = await this.service.close(id);
+            record = await this.featureService.close(id);
 
             reply(record);
         } catch (err) {

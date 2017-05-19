@@ -47,8 +47,8 @@ export class FeatureRequestHeaderComponent implements OnInit {
     this.reemitFeatureRequest.emit();
   }
 
-  destroy(featureRequestId: number) {
-    this.featureRequestService.destroyFeatureRequest(featureRequestId)
+  destroy() {
+    this.featureRequestService.destroyFeatureRequest(this.featureRequest.id)
       .subscribe(featureRequest => this.router.navigate([`/feature-requests`]));
   }
 

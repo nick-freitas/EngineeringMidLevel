@@ -22,6 +22,7 @@ import {ProductAreaService} from "./product-area.service";
 import { PopulatePipe } from './populate.pipe';
 import { FeatureRequestHeaderComponent } from './feature-request-header/feature-request-header.component';
 import { ChangeFeatureRequestStateComponent } from './change-feature-request-state/change-feature-request-state.component';
+import {ThreadService} from "./thread.service";
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ChangeFeatureRequestStateComponent } from './change-feature-request-sta
     AuthService,
     AuthGuard,
     ClientService,
+    ThreadService,
     ProductAreaService,
     FeatureRequestService
   ],

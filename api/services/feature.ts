@@ -41,6 +41,7 @@ export class FeatureService extends Service {
         return this.getOne(id);
     }
 
+    //todo not working preperyl for updating
     async getManyOpenRequestsForClient(clientId: string): Promise<any> {
         assert(clientId, `Called getManyForClient with no clientId`);
 

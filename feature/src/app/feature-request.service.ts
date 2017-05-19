@@ -21,6 +21,7 @@ export class FeatureRequestService extends BaseService {
     this.getFeatureRequestUrl = (id: number) => `${this.baseUrl}features/${id}`;
     this.createFeatureRequestUrl = () => `${this.baseUrl}features`;
     this.updateFeatureRequestUrl = (id) => `${this.baseUrl}features/${id}`;
+    this.destroyFeatureRequestUrl = (id) => `${this.baseUrl}features/${id}`;
     this.closeFeatureRequestUrl = (id) => `${this.baseUrl}features/${id}/close`;
   }
 
