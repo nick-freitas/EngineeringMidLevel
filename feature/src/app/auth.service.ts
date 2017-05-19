@@ -11,13 +11,12 @@ export class AuthService {
     domain: 'rafr-feature.auth0.com',
     responseType: 'token id_token',
     audience: 'https://rafr-feature.auth0.com/userinfo',
-    redirectUri: 'http://localhost:4200/callback',
+    redirectUri: 'http://localhost:4300/callback',
     scope: 'openid'
   });
-  isAuthenticated: BehaviorSubject <Boolean>;
+  isAuthenticated: BehaviorSubject<Boolean>;
 
   constructor(public router: Router) {
-    console.log('is not > constr')
     this.isAuthenticated = new BehaviorSubject<Boolean>(true);
   }
 
@@ -26,9 +25,7 @@ export class AuthService {
   }
 
   public handleAuthentication(): void {
-    console.log('ha')
     this.auth0.parseHash((err, authResult) => {
-      console.log('ph')
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
@@ -47,7 +44,6 @@ export class AuthService {
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
 
-    console.log('is auth')
     this.isAuthenticated.next(true);
   }
 
@@ -57,7 +53,6 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
 
-    console.log('is not ath')
     this.isAuthenticated.next(false);
 
     // Go back to the home route
