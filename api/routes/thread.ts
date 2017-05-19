@@ -14,6 +14,7 @@ export class ThreadRoute extends Route {
     }
 
     addRoutes(): void {
+        //todo add route controlle serivc for get threads for feature X
         this.server.route({
             method: 'GET',
             path: `/threads`,

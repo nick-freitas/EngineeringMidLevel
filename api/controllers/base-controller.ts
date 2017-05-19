@@ -5,7 +5,7 @@ import {Service} from "../services/base-service";
 
 @injectable()
 export abstract class Controller {
-    private internalServerErrorMessage: string;
+    protected internalServerErrorMessage: string;
 
     constructor(protected service: Service) {
         this.internalServerErrorMessage = `An unknown error has occurred. If this persists, please contact your administrator`;

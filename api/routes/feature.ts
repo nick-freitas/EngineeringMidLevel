@@ -14,6 +14,7 @@ export class FeatureRoute extends Route {
     }
 
     addRoutes(): void {
+        // todo add route to close feature request
         this.server.route({
             method: 'GET',
             path: `/features`,
@@ -53,6 +54,15 @@ export class FeatureRoute extends Route {
             handler: (req, reply) => this.featureController.update(req, reply),
             config: {
                 validate: this.featureValidator.updateValidation()
+            }
+        });
+
+        this.server.route({
+            method: 'POST',
+            path: `/features/{id}/close`,
+            handler: (req, reply) => this.featureController.close(req, reply),
+            config: {
+                validate: this.featureValidator.closeValidation()
             }
         });
     }
