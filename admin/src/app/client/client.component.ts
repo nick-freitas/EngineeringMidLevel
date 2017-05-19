@@ -12,7 +12,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class ClientComponent implements OnInit {
   client: Observable<Client>;
-  clientBackup: Client;
   editing: boolean;
 
   constructor(private clientService: ClientService,
@@ -26,7 +25,6 @@ export class ClientComponent implements OnInit {
 
   enableEditing(originalClient: Client) {
     this.editing = true;
-    this.clientBackup = new Client(originalClient.id, originalClient.name);
   }
 
   cancel() {

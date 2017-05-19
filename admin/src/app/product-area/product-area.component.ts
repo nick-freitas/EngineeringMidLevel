@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs/Observable";
 
@@ -12,7 +12,6 @@ import {ProductAreaService} from "../product-area.service";
 })
 export class ProductAreaComponent implements OnInit {
   productArea: Observable<ProductArea>;
-  productAreaBackup: ProductArea;
   editing: boolean;
 
   constructor(private productAreaService: ProductAreaService,
@@ -26,7 +25,6 @@ export class ProductAreaComponent implements OnInit {
 
   enableEditing(originalProductArea: ProductArea) {
     this.editing = true;
-    this.productAreaBackup = new ProductArea(originalProductArea.id, originalProductArea.name);
   }
 
   cancel() {
