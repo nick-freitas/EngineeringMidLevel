@@ -9,7 +9,7 @@
     </div>
     <div class="card-block" *ngFor="let thread of threads">
       <h4 class="card-title">{{thread.name}}</h4>
-      <span class="card-link" [routerLink]="['/threads', thread.id]" disabled>See more</span>
+      <a class="card-link" [routerLink]="['/threads', thread.id]">See more</a>
     </div>
   </div>
 

@@ -7,6 +7,8 @@ import {CreateFeatureRequestComponent} from "./create-feature-request/create-fea
 import {FeatureRequestComponent} from "./feature-request/feature-request.component";
 import {FeatureRequestListComponent} from "./feature-request-list/feature-request-list.component";
 import {HomeComponent} from "./home/home.component";
+import {ThreadComponent} from "./thread/thread.component";
+import {CreateThreadComponent} from "./create-thread/create-thread.component";
 
 const routes: Routes = [
   {
@@ -32,7 +34,18 @@ const routes: Routes = [
     path: 'create-feature-request',
     component: CreateFeatureRequestComponent,
     canActivate: [AuthGuard]
-  }
+  },
+
+  {
+    path: 'threads/:id',
+    component: ThreadComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'feature-requests/:id/create-threads',
+    component: CreateThreadComponent,
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({

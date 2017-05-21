@@ -23,6 +23,9 @@ import { PopulatePipe } from './populate.pipe';
 import { FeatureRequestHeaderComponent } from './feature-request-header/feature-request-header.component';
 import { ChangeFeatureRequestStateComponent } from './change-feature-request-state/change-feature-request-state.component';
 import {ThreadService} from "./thread.service";
+import {ThreadComponent} from './thread/thread.component';
+import {CreateThreadComponent} from './create-thread/create-thread.component';
+import {PostService} from "./post.service";
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import {ThreadService} from "./thread.service";
     CreateFeatureRequestComponent,
     PopulatePipe,
     FeatureRequestHeaderComponent,
-    ChangeFeatureRequestStateComponent
+    ChangeFeatureRequestStateComponent,
+    ThreadComponent,
+    CreateThreadComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,8 @@ import {ThreadService} from "./thread.service";
     ClientService,
     ThreadService,
     ProductAreaService,
-    FeatureRequestService
+    FeatureRequestService,
+    PostService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
