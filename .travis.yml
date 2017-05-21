@@ -16,6 +16,7 @@ install:
 before_script:
   - cd ./api/
   - mysql -u root < ./models/schema.sql
+  - mysql -u root < ./models/seed.sql
   - cd ../
 script:
   - cd ./api/
