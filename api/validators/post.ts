@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import * as Joi from "joi";
 import {Validator} from "./base-validator";
 import {injectable} from "inversify";
 
@@ -14,6 +14,14 @@ export class PostValidator extends Validator {
         this.contentPayloadValidation = Joi.string().min(1);
         this.threadPayloadValidation = Joi.number().integer().min(1);
         this.userPayloadValidation = Joi.number().integer().min(1);
+    }
+
+    getManyForThreadValidation() {
+        return {
+            params: {
+                id: this.idParamValidation
+            }
+        }
     }
 
     createValidation() {

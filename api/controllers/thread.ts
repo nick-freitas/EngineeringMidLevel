@@ -1,9 +1,9 @@
-import {Controller} from "./base-controller";
 import {inject, injectable} from "inversify";
-import {iocTypes} from "../ioc-types";
-import {ThreadService} from "../services/thread";
 import * as Boom from 'boom';
 
+import {Controller} from "./base-controller";
+import {iocTypes} from "../ioc-types";
+import {ThreadService} from "../services/thread";
 
 @injectable()
 export class ThreadController extends Controller {

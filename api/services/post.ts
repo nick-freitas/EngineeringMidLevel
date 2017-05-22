@@ -9,4 +9,13 @@ export class PostService extends Service {
     constructor(@inject(iocTypes.PostDbSchema) postDbSchema: PostDbSchema) {
         super(postDbSchema);
     }
+
+    async getManyForThread(id): Promise<any[]>{
+        return this.dbSchema.schema.findAll({
+            where: {thread: id},
+            order: [
+                ['createdAt', 'DESC']
+            ]
+        });
+    }
 }
