@@ -9,4 +9,13 @@ export class ThreadService extends Service {
     constructor(@inject(iocTypes.ThreadDbSchema) threadDbSchema: ThreadDbSchema) {
         super(threadDbSchema);
     }
+
+    async getManyForFeature(id): Promise<any[]> {
+        return this.dbSchema.schema.findAll({
+            where: {feature: id},
+            order: [
+                ['updatedAt', 'DESC']
+            ]
+        });
+    }
 }

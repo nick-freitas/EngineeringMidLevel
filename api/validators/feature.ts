@@ -59,4 +59,12 @@ export class FeatureValidator extends Validator {
 
         return Object.assign({}, genericValidation, specificValidation);
     }
+
+    closeValidation() {
+        return {
+            params: {
+                id: this.idParamValidation
+            }
+        };
+    }
 }

@@ -4,6 +4,8 @@ import {Observable} from "rxjs/Observable";
 
 import {FeatureRequest} from "../feature-request";
 import {FeatureRequestService} from "../feature-request.service";
+import {Thread} from "../thread";
+import {ThreadService} from "../thread.service";
 
 @Component({
   selector: 'rafr-feature-request',
@@ -12,43 +14,30 @@ import {FeatureRequestService} from "../feature-request.service";
 })
 export class FeatureRequestComponent implements OnInit {
   featureRequest: Observable<FeatureRequest>;
-  featureRequestBackup: FeatureRequest;
-  editing: boolean;
+  threads: Observable<Thread[]>;
 
   constructor(private featureRequestService: FeatureRequestService,
-              private route: ActivatedRoute,
-              private router: Router) {
+              private threadService: ThreadService,
+              private route: ActivatedRoute) {
   }
 
-  ngOnInit() {
-    this.fetchFeatureRequest();
+  async ngOnInit() {
+    this.featureRequest = await this.fetchFeatureRequest();
+    this.threads = await this.fetchThreads()
   }
 
-  enableEditing(originalFeatureRequest: FeatureRequest) {
-    this.editing = true;
-    this.featureRequestBackup = new FeatureRequest(originalFeatureRequest.id, originalFeatureRequest.title,
-      originalFeatureRequest.description, originalFeatureRequest.clientPriority, originalFeatureRequest.client,
-      originalFeatureRequest.targetDate, originalFeatureRequest.ticketUrl, originalFeatureRequest.productArea,
-      originalFeatureRequest.status);
-  }
-
-  cancel() {
-    this.editing = false;
-    this.fetchFeatureRequest();
-  }
-
-  save(featureRequest: FeatureRequest) {
-    this.featureRequest = this.featureRequestService.updateFeatureRequest(featureRequest.id, featureRequest);
-    this.editing = false;
-  }
-
-  destroy(featureRequestId: number) {
-    this.featureRequestService.destroyFeatureRequest(featureRequestId)
-      .subscribe(featureRequest => this.router.navigate([`/feature-requests`]));
-  }
-
-  private fetchFeatureRequest() {
+  private async fetchFeatureRequest(): Promise<Observable<FeatureRequest>> {
     const id = this.route.snapshot.params['id'];
-    this.featureRequest = this.featureRequestService.getFeatureRequest(id);
+    return this.featureRequestService.getFeatureRequest(id);
+  }
+
+  private async fetchThreads(): Promise<Observable<Thread[]>> {
+    const id = this.route.snapshot.params['id'];
+    return this.threadService.getThreadListForFeature(id);
+  }
+
+  //todo cancel is not working properly
+  async resetFeatureRequest() {
+    this.featureRequest = await this.fetchFeatureRequest();
   }
 }

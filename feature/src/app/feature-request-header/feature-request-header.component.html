@@ -1,0 +1,89 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between">
+    <h3>{{featureRequest.title}}</h3>
+    <div class="edit-button-group" *ngIf="editing; else viewModeButtonGroup">
+      <button type="button" class="btn btn-danger pull-right" (click)="destroy()">Delete</button>
+      <button type="button" class="btn btn-secondary pull-right" (click)="cancel()" disabled>Cancel</button>
+      <button type="button" class="btn btn-primary pull-right" (click)="save()">Save</button>
+    </div>
+    <ng-template #viewModeButtonGroup>
+      <div class="view-button-group" *ngIf="!editing">
+        <button type="button" class="btn btn-primary pull-right" (click)="enableEditing(featureRequest)">Edit</button>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="card-block" *ngIf="editing; else viewModeCardBlock">
+    <div class="form-group row">
+      <label for="feature-request-title" class="col-2 col-form-label">Title</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [(ngModel)]="featureRequest.title" id="feature-request-title"
+               name="title">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="feature-request-description" class="col-2 col-form-label">Description</label>
+      <div class="col-10">
+          <textarea class="form-control" [(ngModel)]="featureRequest.description" id="feature-request-description"
+                    name="description"></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Product Area</label>
+      <div class="col-10">
+        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" [(ngModel)]="featureRequest.productArea">
+          <option *ngFor="let productArea of productAreas | async" [value]="productArea.id">{{productArea.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Client</label>
+      <div class="col-10">
+        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" [(ngModel)]="featureRequest.client">
+          <option *ngFor="let client of clients | async" [value]="client.id">{{client.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="feature-request-client-priority" class="col-2 col-form-label">Client Priority</label>
+      <div class="col-10">
+        <input class="form-control" type="number" [ngModel]="featureRequest.clientPriority"
+               id="feature-request-client-priority"
+               name="feature-request-client-priority">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="feature-request-target-date" class="col-2 col-form-label">Target Date</label>
+      <div class="col-10">
+        <input class="form-control" type="date" [ngModel]="featureRequest.targetDate" id="feature-request-target-date"
+               name="feature-request-target-date">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="feature-request-ticket-url" class="col-2 col-form-label">Ticket Url</label>
+      <div class="col-10">
+        <input class="form-control" type="text" [ngModel]="featureRequest.ticketUrl | amDateFormat:'YYYY-MM-DD'"
+               (ngModelChange)="featureRequest.ticketUrl = $event" id="feature-request-ticket-url" name="ticket-url">
+      </div>
+    </div>
+
+    <rafr-change-feature-request-state [featureRequestId]="featureRequest.id"
+                                       [status]="featureRequest.status"></rafr-change-feature-request-state>
+  </div>
+  <ng-template #viewModeCardBlock>
+    <div class="card-block">
+      <p class="card-text">Title: {{featureRequest.title}}</p>
+      <p class="card-text">Description: {{featureRequest.description}}</p>
+      <p class="card-text">Product Area: {{(featureRequest.productArea | populate: (productAreas | async))?.name}}</p>
+      <p class="card-text">Client: {{(featureRequest.client | populate: (clients | async))?.name}}</p>
+      <p class="card-text">Client Priority: {{featureRequest.clientPriority}}</p>
+      <p class="card-text">Target Date: {{featureRequest.targetDate | date:'fullDate'}}</p>
+      <p class="card-text">Ticket Url: <a href="{{featureRequest.ticketUrl}}">{{featureRequest.ticketUrl}}</a></p>
+
+      <rafr-change-feature-request-state [featureRequestId]="featureRequest.id"
+                                         [status]="featureRequest.status"></rafr-change-feature-request-state>
+    </div>
+  </ng-template>
+</div>
+

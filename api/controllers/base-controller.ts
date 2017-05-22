@@ -5,7 +5,7 @@ import {Service} from "../services/base-service";
 
 @injectable()
 export abstract class Controller {
-    private internalServerErrorMessage: string;
+    protected internalServerErrorMessage: string;
 
     constructor(protected service: Service) {
         this.internalServerErrorMessage = `An unknown error has occurred. If this persists, please contact your administrator`;
@@ -13,9 +13,9 @@ export abstract class Controller {
 
     async getMany(req, reply) {
         try {
-            const record = await this.service.getMany();
+            const records = await this.service.getMany();
 
-            reply(record);
+            reply(records);
         } catch (err) {
             console.error(err);
             reply(Boom.badImplementation(this.internalServerErrorMessage));

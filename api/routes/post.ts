@@ -16,6 +16,15 @@ export class PostRoute extends Route {
     addRoutes(): void {
         this.server.route({
             method: 'GET',
+            path: `/threads/{id}/posts`,
+            handler: (req, reply) => this.postController.getManyForThread(req, reply),
+            config: {
+                validate: this.postValidator.getManyForThreadValidation()
+            }
+        });
+
+        this.server.route({
+            method: 'GET',
             path: `/posts`,
             handler: (req, reply) => this.postController.getMany(req, reply)
         });

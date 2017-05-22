@@ -55,5 +55,14 @@ export class FeatureRoute extends Route {
                 validate: this.featureValidator.updateValidation()
             }
         });
+
+        this.server.route({
+            method: 'POST',
+            path: `/features/{id}/close`,
+            handler: (req, reply) => this.featureController.close(req, reply),
+            config: {
+                validate: this.featureValidator.closeValidation()
+            }
+        });
     }
 }

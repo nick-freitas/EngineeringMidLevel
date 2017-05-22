@@ -37,4 +37,12 @@ export class ThreadValidator extends Validator {
 
         return Object.assign({}, genericValidation, specificValidation);
     }
+
+    getManyForFeatureValidation() {
+        return {
+            params: {
+                id: this.idParamValidation
+            }
+        };
+    }
 }

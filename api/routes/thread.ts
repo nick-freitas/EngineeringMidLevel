@@ -55,5 +55,14 @@ export class ThreadRoute extends Route {
                 validate: this.threadValidator.updateValidation()
             }
         });
+
+        this.server.route({
+            method: 'GET',
+            path: `/features/{id}/threads`,
+            handler: (req, reply) => this.threadController.getManyForFeature(req, reply),
+            config: {
+                validate: this.threadValidator.getManyForFeatureValidation()
+            }
+        });
     }
 }

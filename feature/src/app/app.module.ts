@@ -2,6 +2,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
+import {MomentModule} from 'angular2-moment';
 
 import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from "./app.component";
@@ -16,6 +17,15 @@ import {FeatureRequestComponent} from "./feature-request/feature-request.compone
 import {FeatureRequestListResultComponent} from "./feature-request-list-result/feature-request-list-result.component";
 import {CreateFeatureRequestComponent} from "./create-feature-request/create-feature-request.component";
 import {FeatureRequestService} from "./feature-request.service";
+import {ClientService} from "./client.service";
+import {ProductAreaService} from "./product-area.service";
+import { PopulatePipe } from './populate.pipe';
+import { FeatureRequestHeaderComponent } from './feature-request-header/feature-request-header.component';
+import { ChangeFeatureRequestStateComponent } from './change-feature-request-state/change-feature-request-state.component';
+import {ThreadService} from "./thread.service";
+import {ThreadComponent} from './thread/thread.component';
+import {CreateThreadComponent} from './create-thread/create-thread.component';
+import {PostService} from "./post.service";
 
 @NgModule({
   declarations: [
@@ -27,18 +37,28 @@ import {FeatureRequestService} from "./feature-request.service";
     FeatureRequestListComponent,
     FeatureRequestComponent,
     FeatureRequestListResultComponent,
-    CreateFeatureRequestComponent
+    CreateFeatureRequestComponent,
+    PopulatePipe,
+    FeatureRequestHeaderComponent,
+    ChangeFeatureRequestStateComponent,
+    ThreadComponent,
+    CreateThreadComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MomentModule
   ],
   providers: [
     AuthService,
     AuthGuard,
-    FeatureRequestService
+    ClientService,
+    ThreadService,
+    ProductAreaService,
+    FeatureRequestService,
+    PostService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
