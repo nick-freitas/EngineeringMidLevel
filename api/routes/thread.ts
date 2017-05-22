@@ -17,7 +17,10 @@ export class ThreadRoute extends Route {
         this.server.route({
             method: 'GET',
             path: `/threads`,
-            handler: (req, reply) => this.threadController.getMany(req, reply)
+            handler: (req, reply) => this.threadController.getMany(req, reply),
+            config: {
+                validate: this.threadValidator.getManyValidation()
+            }
         });
 
         this.server.route({

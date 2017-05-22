@@ -1,39 +1,36 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
-import {Observable} from "rxjs/Observable";
 
 import {BaseService} from "./base.service";
 import {ProductArea} from "./product-area";
 
 @Injectable()
-export class ProductAreaService extends BaseService {
-  private getProductAreaListUrl: () => string;
-  private getProductAreaUrl: (id) => string;
-
-  constructor(private http: Http) {
-    super();
-
-    this.getProductAreaListUrl = () => `${this.baseUrl}product-areas`;
-    this.getProductAreaUrl = (id: number) => `${this.baseUrl}product-areas/${id}`;
+export class ProductAreaService extends BaseService<ProductArea> {
+  constructor(http: Http) {
+    super(http);
   }
 
-  getProductAreaList(): Observable<ProductArea[]> {
-    return this.http.get(this.getProductAreaListUrl())
-      .map(res => {
-        const resProductAreas = res.json() || [];
-
-        return resProductAreas.map(productArea => new ProductArea(productArea.id, productArea.name));
-      })
-      .catch(this.errorHandler);
+  getListUrl(): string {
+    return `${this.baseUrl}product-areas`;
   }
 
-  getProductArea(id: number): Observable<ProductArea> {
-    return this.http.get(this.getProductAreaUrl(id))
-      .map(res => {
-        const resProductArea = res.json() || {};
+  getOneUrl(id: number): string {
+    return `${this.baseUrl}product-areas/${id}`;
+  }
 
-        return new ProductArea(resProductArea.id, resProductArea.name);
-      })
-      .catch(this.errorHandler);
+  createNewInstance(productArea): ProductArea {
+    return new ProductArea(productArea.id, productArea.name);
+  }
+
+  updateUrl(_): string {
+    return undefined;
+  }
+
+  createUrl(): string {
+    return undefined;
+  }
+
+  destroyUrl(_): string {
+    return undefined;
   }
 }

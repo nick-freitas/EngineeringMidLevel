@@ -7,8 +7,32 @@ import * as assert from "assert";
 
 @injectable()
 export class FeatureService extends Service {
-    constructor(@inject(iocTypes.FeatureDbSchema) featureDbSchema: FeatureDbSchema) {
+    constructor(@inject(iocTypes.FeatureDbSchema) private featureDbSchema: FeatureDbSchema) {
         super(featureDbSchema);
+    }
+
+    async getCountWithClient(client: number): Promise<number> {
+        if (!client) {
+            return super.getCount();
+        }
+
+        return this.featureDbSchema.schema.count({where: {client: client}});
+    }
+
+    async getManyWithClient(page: number, limit: number, client: number): Promise<any[]> {
+        assert(page, `Called getMany with no page`);
+        assert(typeof limit === "number" && limit >= 0, `Called getMany with no limit`);
+
+        if (!client) {
+            return super.getMany(page, limit);
+        }
+
+        const skip = (page - 1) * limit;
+        return this.featureDbSchema.schema.findAll({
+            offset: skip,
+            limit: limit,
+            where: {client: client}
+        });
     }
 
     async create(args): Promise<any> {

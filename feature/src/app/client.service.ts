@@ -1,39 +1,49 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
-import {Observable} from "rxjs/Observable";
 
 import {Client} from "./client";
 import {BaseService} from "./base.service";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class ClientService extends BaseService {
-  private getClientListUrl: () => string;
-  private getClientUrl: (id) => string;
-
-  constructor(private http: Http) {
-    super();
-
-    this.getClientListUrl = () => `${this.baseUrl}clients`;
-    this.getClientUrl = (id: number) => `${this.baseUrl}clients/${id}`;
+export class ClientService extends BaseService<Client> {
+  constructor(http: Http) {
+    super(http);
   }
 
-  getClientList(): Observable<Client[]> {
-    return this.http.get(this.getClientListUrl())
-      .map(res => {
-        const resClients = res.json() || [];
-
-        return resClients.map(client => new Client(client.id, client.name));
-      })
-      .catch(this.errorHandler);
+  getListUrl() {
+    return `${this.baseUrl}clients`;
   }
 
-  getClient(id: number): Observable<Client> {
-    return this.http.get(this.getClientUrl(id))
-      .map(res => {
-        const resClient = res.json() || {};
+  getOneUrl(id: number): string {
+    return `${this.baseUrl}clients/${id}`;
+  }
 
-        return new Client(resClient.id, resClient.name);
-      })
-      .catch(this.errorHandler);
+  createNewInstance(client): Client {
+    return new Client(client.id, client.name);
+  }
+
+  update(_, __): Observable<Client> {
+    throw new Error(`Cannot update client from this interface`);
+  }
+
+  create(_): Observable<Client> {
+    throw new Error(`Cannot update client from this interface`);
+  }
+
+  destroy(_): Observable<void> {
+    throw new Error(`Cannot update client from this interface`);
+  }
+
+  updateUrl(id: number): string {
+    return undefined;
+  }
+
+  createUrl(): string {
+    return undefined;
+  }
+
+  destroyUrl(id: number): string {
+    return undefined;
   }
 }

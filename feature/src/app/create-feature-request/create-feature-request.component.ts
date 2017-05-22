@@ -17,7 +17,7 @@ export class CreateFeatureRequestComponent {
 
   // todo missing all of the fields t create
   createFeatureRequest() {
-    this.featureRequestService.createFeatureRequest(this.featureRequestModel)
+    this.featureRequestService.create(this.featureRequestModel)
       .subscribe(featureRequest => this.router.navigate([`/feature-requests/${featureRequest.id}`]));
   }
 }

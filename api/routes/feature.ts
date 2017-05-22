@@ -17,7 +17,10 @@ export class FeatureRoute extends Route {
         this.server.route({
             method: 'GET',
             path: `/features`,
-            handler: (req, reply) => this.featureController.getMany(req, reply)
+            handler: (req, reply) => this.featureController.getMany(req, reply),
+            config: {
+                validate: this.featureValidator.getManyValidation()
+            }
         });
 
         this.server.route({

@@ -1,6 +1,7 @@
 import * as Joi from "joi";
-import {Validator} from "./base-validator";
 import {injectable} from "inversify";
+
+import {Validator} from "./base-validator";
 
 @injectable()
 export class FeatureValidator extends Validator {
@@ -12,6 +13,7 @@ export class FeatureValidator extends Validator {
     ClientPayloadValidation;
     productAreaPayloadValidation;
     statusPayloadValidation;
+    clientQueryValidation;
 
     constructor() {
         super();
@@ -24,6 +26,14 @@ export class FeatureValidator extends Validator {
         this.ClientPayloadValidation = Joi.number().integer().min(1);
         this.productAreaPayloadValidation = Joi.number().integer().min(1);
         this.statusPayloadValidation = Joi.number().integer().min(1);
+        this.clientQueryValidation = Joi.number().integer().min(1);
+    }
+
+    getManyValidation() {
+        const genericValidation = super.getManyValidation();
+        genericValidation.query.client = this.clientQueryValidation;
+
+        return genericValidation;
     }
 
     createValidation() {

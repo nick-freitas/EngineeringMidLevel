@@ -2,7 +2,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
-import {MomentModule} from 'angular2-moment';
+import {MomentModule} from "angular2-moment";
 
 import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from "./app.component";
@@ -19,13 +19,16 @@ import {CreateFeatureRequestComponent} from "./create-feature-request/create-fea
 import {FeatureRequestService} from "./feature-request.service";
 import {ClientService} from "./client.service";
 import {ProductAreaService} from "./product-area.service";
-import { PopulatePipe } from './populate.pipe';
-import { FeatureRequestHeaderComponent } from './feature-request-header/feature-request-header.component';
-import { ChangeFeatureRequestStateComponent } from './change-feature-request-state/change-feature-request-state.component';
+import {PopulatePipe} from "./populate.pipe";
+import {FeatureRequestHeaderComponent} from "./feature-request-header/feature-request-header.component";
+import {ChangeFeatureRequestStateComponent} from "./change-feature-request-state/change-feature-request-state.component";
 import {ThreadService} from "./thread.service";
-import {ThreadComponent} from './thread/thread.component';
-import {CreateThreadComponent} from './create-thread/create-thread.component';
+import {ThreadComponent} from "./thread/thread.component";
+import {CreateThreadComponent} from "./create-thread/create-thread.component";
 import {PostService} from "./post.service";
+import {ThreadPostListComponent} from "./thread-post-list/thread-post-list.component";
+import {PagingComponent} from "./paging/paging.component";
+import {ForNumberPipe} from "./for-number.pipe";
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import {PostService} from "./post.service";
     FeatureRequestHeaderComponent,
     ChangeFeatureRequestStateComponent,
     ThreadComponent,
-    CreateThreadComponent
+    CreateThreadComponent,
+    ThreadPostListComponent,
+    PagingComponent,
+    ForNumberPipe
   ],
   imports: [
     BrowserModule,

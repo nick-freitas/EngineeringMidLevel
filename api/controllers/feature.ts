@@ -10,11 +10,26 @@ export class FeatureController extends Controller {
         super(featureService);
     }
 
+    async getMany(req, reply) {
+        try {
+            const page = req.query.page;
+            const limit = req.query.limit;
+            const client = req.query.client;
+
+            const records = await this.featureService.getManyWithClient(page, limit, client);
+            const totalCount = await this.featureService.getCountWithClient(client);
+
+            reply(records).header('X-total-count', totalCount);
+        } catch (err) {
+            console.error(err);
+            reply(Boom.badImplementation(this.internalServerErrorMessage));
+        }
+    }
+
     async close(req, reply) {
         try {
             const id = req.params.id;
             let record = await this.service.getOne(id);
-
             if (!record) {
                 return reply(Boom.notFound(`Record not found`));
             }

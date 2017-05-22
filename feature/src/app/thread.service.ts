@@ -1,25 +1,18 @@
-import { Injectable } from '@angular/core';
-import {BaseService} from "./base.service";
+import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
+
+import {BaseService} from "./base.service";
 import {Thread} from "./thread";
 
 @Injectable()
-export class ThreadService extends BaseService {
-  private getThreadListForFeatureUrl: (id) => string;
-  private getThreadUrl: (id) => string;
-  private createThreadUrl: (id) => string;
-
-  constructor(private http: Http) {
-    super();
-
-    this.getThreadListForFeatureUrl = (id) => `${this.baseUrl}features/${id}/threads`;
-    this.getThreadUrl = (id) => `${this.baseUrl}threads/${id}`;
-    this.createThreadUrl = (id) => `${this.baseUrl}features/${id}/posts`;
+export class ThreadService extends BaseService<Thread> {
+  constructor(http: Http) {
+    super(http);
   }
 
-  getThreadListForFeature(id): Observable<Thread[]> {
-    return this.http.get(this.getThreadListForFeatureUrl(id))
+  getListForFeature(id): Observable<Thread[]> {
+    return this.http.get(this.getListForFeatureUrl(id))
       .map(res => {
         const resThreads = res.json() || [];
 
@@ -28,24 +21,41 @@ export class ThreadService extends BaseService {
       .catch(this.errorHandler);
   }
 
-  getThread(id): Observable<Thread> {
-    return this.http.get(this.getThreadUrl(id))
-      .map(res => {
-        const resThread = res.json() || [];
-
-        return new Thread(resThread.id, resThread.name, resThread.feature);
-      })
+  createForFeature(id, thread): Observable<Thread> {
+    return this.http.post(this.createForFeatureUrl(id), thread)
+      .map(res => this.createNewInstance(res.json() || {}))
       .catch(this.errorHandler);
   }
 
-  createThread(id, thread): Observable<Thread> {
-    return this.http.post(this.createThreadUrl(id), thread)
-      .map(res => {
-        const resThread = res.json() || {};
+  getListForFeatureUrl(id): string {
+    return `${this.baseUrl}features/${id}/threads`;
+  }
 
-        return new Thread(resThread.id, resThread.name, resThread.feature);
+  createForFeatureUrl(id):string {
+    return `${this.baseUrl}features/${id}/threads`;
+  }
 
-      })
-      .catch(this.errorHandler);
+  getOneUrl(id: number): string {
+    return `${this.baseUrl}threads/${id}`;
+  }
+
+  createNewInstance(thread): Thread {
+    return new Thread(thread.id, thread.name, thread.feature);
+  }
+
+  getListUrl(): string {
+    return undefined;
+  }
+
+  updateUrl(id: number): string {
+    return undefined;
+  }
+
+  createUrl(): string {
+    return undefined;
+  }
+
+  destroyUrl(id: number): string {
+    return undefined;
   }
 }

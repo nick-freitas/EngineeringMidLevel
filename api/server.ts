@@ -24,7 +24,11 @@ export class Server {
         this.server.connection({
             host: this.appConfig.server.host,
             port: this.appConfig.server.portNumber,
-            routes: {cors: true}
+            routes: {
+                cors: {
+                    additionalExposedHeaders: [`X-total-count`]
+                }
+            }
         });
 
         // add logging

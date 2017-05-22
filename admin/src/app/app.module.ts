@@ -21,6 +21,9 @@ import {ProductAreaService} from "./product-area.service";
 import {AuthService} from "./auth.service";
 import { CallbackComponent } from './callback/callback.component';
 import {AuthGuard} from "./auth-guard.service";
+import { LoadingComponent } from './loading/loading.component';
+import { PagingComponent } from './paging/paging.component';
+import { ForNumberPipe } from './for-number.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import {AuthGuard} from "./auth-guard.service";
     ProductAreaListResultComponent,
     ProductAreaListComponent,
     ProductAreaComponent,
-    CallbackComponent
+    CallbackComponent,
+    LoadingComponent,
+    PagingComponent,
+    ForNumberPipe
   ],
   imports: [
     BrowserModule,

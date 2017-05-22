@@ -17,11 +17,14 @@ export class PostValidator extends Validator {
     }
 
     getManyForThreadValidation() {
-        return {
+        const genericValidation = super.getManyValidation();
+        const specificValidation = {
             params: {
                 id: this.idParamValidation
             }
-        }
+        };
+
+        return Object.assign({}, genericValidation, specificValidation);
     }
 
     createValidation() {

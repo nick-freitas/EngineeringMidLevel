@@ -28,12 +28,12 @@ export class FeatureRequestComponent implements OnInit {
 
   private async fetchFeatureRequest(): Promise<Observable<FeatureRequest>> {
     const id = this.route.snapshot.params['id'];
-    return this.featureRequestService.getFeatureRequest(id);
+    return this.featureRequestService.getOne(id);
   }
 
   private async fetchThreads(): Promise<Observable<Thread[]>> {
     const id = this.route.snapshot.params['id'];
-    return this.threadService.getThreadListForFeature(id);
+    return this.threadService.getListForFeature(id);
   }
 
   //todo cancel is not working properly

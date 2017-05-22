@@ -1,0 +1,21 @@
+<div class="posts-list" *ngIf="list | async; let postList; else postsNotLoaded">
+  <div class="card post-card" *ngFor="let post of postList.list">
+    <div class="card-header d-flex justify-content-between">
+      <span>{{post.user}}</span>
+      <div class="button-group">
+        <button class="btn btn-outline-primary pull-right" [routerLink]="['posts', post.id, 'edit']" disabled>Edit
+        </button>
+      </div>
+    </div>
+    <div class="card-block">
+      <p class="card-text">{{post.content}}</p>
+    </div>
+  </div>
+
+  <rafr-paging (changePage)="setPage($event)" [limit]="limit" [page]="page"
+               [totalCount]="postList.totalCount"></rafr-paging>
+</div>
+
+<ng-template #postsNotLoaded>
+  <rafr-loading [loadingText]="'Loading posts'"></rafr-loading>
+</ng-template>

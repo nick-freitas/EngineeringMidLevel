@@ -17,7 +17,10 @@ export class ClientRoute extends Route {
         this.server.route({
             method: 'GET',
             path: `/clients`,
-            handler: (req, reply) => this.clientController.getMany(req, reply)
+            handler: (req, reply) => this.clientController.getMany(req, reply),
+            config: {
+                validate: this.clientValidator.getManyValidation()
+            }
         });
 
         this.server.route({

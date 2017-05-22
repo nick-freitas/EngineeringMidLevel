@@ -1,26 +1,21 @@
 <div class="card card-inverse thread-header" style="background-color: #333; border-color: #333;">
   <div class="card-block">
     <h3 class="card-title">Feature Requests</h3>
-    <button type="button" class="btn btn-primary btn-lg btn-block create-new-button" routerLink="/create-feature-request" disabled>
+    <button type="button" class="btn btn-primary btn-lg btn-block create-new-button"
+            routerLink="/create-feature-request" disabled>
       Create New Feature Request
     </button>
   </div>
 </div>
 
-<div *ngIf="featureRequestList | async; let featureRequestList; else featureRequestListNotLoaded">
+<div *ngIf="list | async; let featureRequestList; else featureRequestListNotLoaded">
+  <rafr-feature-request-list-result *ngFor="let featureRequest of featureRequestList.list"
+                                    [featureRequest]="featureRequest"></rafr-feature-request-list-result>
 
-  <rafr-feature-request-list-result *ngFor="let featureRequest of featureRequestList"
-                                 [featureRequest]="featureRequest"></rafr-feature-request-list-result>
+  <rafr-paging (changePage)="setPage($event)" [limit]="limit" [page]="page"
+               [totalCount]="featureRequestList.totalCount"></rafr-paging>
 </div>
 
 <ng-template #featureRequestListNotLoaded>
-  <div class="card">
-    <div class="card-block">
-      <span i18n>Loading feature request list...</span>
-      <div class="progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated w-100" role="progressbar"
-             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
-    </div>
-  </div>
+  <rafr-loading [loadingText]="'Loading feature request list'"></rafr-loading>
 </ng-template>

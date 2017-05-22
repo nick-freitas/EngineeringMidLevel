@@ -17,8 +17,8 @@ import {Router} from "@angular/router";
 export class FeatureRequestHeaderComponent implements OnInit {
   @Input() featureRequest: FeatureRequest;
   @Output() reemitFeatureRequest: EventEmitter<void>;
-  clients: Observable<Client[]>;
-  productAreas: Observable<ProductArea[]>;
+  clients: Observable<{list: Client[], totalCount: number}>;
+  productAreas: Observable<{list: ProductArea[], totalCount: number}>;
   editing: boolean;
 
   constructor(private clientService: ClientService,
@@ -37,8 +37,8 @@ export class FeatureRequestHeaderComponent implements OnInit {
       this.clients,
       this.productAreas
     ] = await Promise.all([
-      this.clientService.getClientList(),
-      this.productAreaService.getProductAreaList()
+      this.clientService.getList(), //get all
+      this.productAreaService.getList() //get all
     ]);
   }
 
@@ -48,12 +48,12 @@ export class FeatureRequestHeaderComponent implements OnInit {
   }
 
   destroy() {
-    this.featureRequestService.destroyFeatureRequest(this.featureRequest.id)
+    this.featureRequestService.destroy(this.featureRequest.id)
       .subscribe(featureRequest => this.router.navigate([`/feature-requests`]));
   }
 
   async save() {
-    this.featureRequestService.updateFeatureRequest(this.featureRequest.id, this.featureRequest)
+    this.featureRequestService.update(this.featureRequest.id, this.featureRequest)
       .subscribe(updatedFeatureRequest => {
         this.editing = false;
         this.featureRequest = updatedFeatureRequest;

@@ -9,12 +9,25 @@ export abstract class Service {
     }
 
     /**
+     * Gets how many records there are in the database
+     *
+     * @returns {Promise<void>}
+     */
+    async getCount(): Promise<number> {
+        return this.dbSchema.schema.count();
+    }
+
+    /**
      * Get many (all at the moment) records from the database
      *
      * @returns {Promise<any[]>}
      */
-    async getMany(): Promise<any[]> {
-        return this.dbSchema.schema.findAll();
+    async getMany(page: number, limit: number): Promise<any[]> {
+        assert(page, `Called getMany with no page`);
+        assert(typeof limit === "number" && limit >= 0, `Called getMany with no limit`);
+
+        const skip = (page - 1) * limit;
+        return this.dbSchema.schema.findAll({offset: skip, limit: limit});
     }
 
     /**

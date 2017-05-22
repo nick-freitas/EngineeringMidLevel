@@ -1,5 +1,5 @@
 import {injectable} from "inversify";
-import * as Boom from 'boom';
+import * as Boom from "boom";
 
 import {Service} from "../services/base-service";
 
@@ -13,9 +13,13 @@ export abstract class Controller {
 
     async getMany(req, reply) {
         try {
-            const records = await this.service.getMany();
+            const page = req.query.page;
+            const limit = req.query.limit;
 
-            reply(records);
+            const records = await this.service.getMany(page, limit);
+            const totalCount = await this.service.getCount();
+
+            reply(records).header('X-total-count', totalCount);
         } catch (err) {
             console.error(err);
             reply(Boom.badImplementation(this.internalServerErrorMessage));

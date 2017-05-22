@@ -1,5 +1,5 @@
 import {inject, injectable} from "inversify";
-import * as Boom from 'boom';
+import * as Boom from "boom";
 
 import {Controller} from "./base-controller";
 import {iocTypes} from "../ioc-types";
@@ -13,9 +13,13 @@ export class PostController extends Controller {
 
     async getManyForThread(req, reply) {
         try {
-            const records = await this.postService.getManyForThread(req.params.id);
+            const page = req.query.page;
+            const limit = req.query.limit;
 
-            reply(records);
+            const records = await this.postService.getManyForThread(req.params.id, page, limit);
+            const totalCount = await this.postService.getCountForThread(req.params.id);
+
+            reply(records).header('X-total-count', totalCount);
         } catch (err) {
             console.error(err);
             reply(Boom.badImplementation(this.internalServerErrorMessage));

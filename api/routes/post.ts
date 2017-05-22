@@ -26,7 +26,10 @@ export class PostRoute extends Route {
         this.server.route({
             method: 'GET',
             path: `/posts`,
-            handler: (req, reply) => this.postController.getMany(req, reply)
+            handler: (req, reply) => this.postController.getMany(req, reply),
+            config: {
+                validate: this.postValidator.getManyValidation()
+            }
         });
 
         this.server.route({

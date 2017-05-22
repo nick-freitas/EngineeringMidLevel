@@ -8,8 +8,8 @@ import {ProductAreaValidator} from "../validators/product-area";
 @injectable()
 export class ProductAreaRoute extends Route {
     constructor(@inject(iocTypes.Server) server: Server,
-                @inject(iocTypes.ProductAreaController) private clientController: ProductAreaController,
-                @inject(iocTypes.ProductAreaValidator) private clientValidator: ProductAreaValidator) {
+                @inject(iocTypes.ProductAreaController) private productAreaController: ProductAreaController,
+                @inject(iocTypes.ProductAreaValidator) private productAreaValidator: ProductAreaValidator) {
         super(server);
     }
 
@@ -17,42 +17,45 @@ export class ProductAreaRoute extends Route {
         this.server.route({
             method: 'GET',
             path: `/product-areas`,
-            handler: (req, reply) => this.clientController.getMany(req, reply)
+            handler: (req, reply) => this.productAreaController.getMany(req, reply),
+            config: {
+                validate: this.productAreaValidator.getManyValidation()
+            }
         });
 
         this.server.route({
             method: 'GET',
             path: `/product-areas/{id}`,
-            handler: (req, reply) => this.clientController.getOne(req, reply),
+            handler: (req, reply) => this.productAreaController.getOne(req, reply),
             config: {
-                validate: this.clientValidator.getOneValidation()
+                validate: this.productAreaValidator.getOneValidation()
             }
         });
 
         this.server.route({
             method: 'DELETE',
             path: `/product-areas/{id}`,
-            handler: (req, reply) => this.clientController.destroy(req, reply),
+            handler: (req, reply) => this.productAreaController.destroy(req, reply),
             config: {
-                validate: this.clientValidator.destroyValidation()
+                validate: this.productAreaValidator.destroyValidation()
             }
         });
 
         this.server.route({
             method: 'POST',
             path: `/product-areas`,
-            handler: (req, reply) => this.clientController.create(req, reply),
+            handler: (req, reply) => this.productAreaController.create(req, reply),
             config: {
-                validate: this.clientValidator.createValidation()
+                validate: this.productAreaValidator.createValidation()
             }
         });
 
         this.server.route({
             method: 'PUT',
             path: `/product-areas/{id}`,
-            handler: (req, reply) => this.clientController.update(req, reply),
+            handler: (req, reply) => this.productAreaController.update(req, reply),
             config: {
-                validate: this.clientValidator.updateValidation()
+                validate: this.productAreaValidator.updateValidation()
             }
         });
     }

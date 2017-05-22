@@ -19,7 +19,7 @@ export class CreateThreadComponent {
   // todo missing all of the fields t create
   createThread() {
     const id = this.route.snapshot.params['id'];
-    this.threadService.createThread(id, this.threadModel)
+    this.threadService.createForFeature(id, this.threadModel)
       .subscribe(thread => this.router.navigate([`/threads/${thread.id}`]));
   }
 }

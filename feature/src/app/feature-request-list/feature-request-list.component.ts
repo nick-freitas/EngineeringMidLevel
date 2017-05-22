@@ -1,20 +1,19 @@
-import {Component, OnInit} from "@angular/core";
-import {Observable} from "rxjs/Observable";
+import {Component} from "@angular/core";
 import {FeatureRequest} from "../feature-request";
 import {FeatureRequestService} from "../feature-request.service";
+import {BaseListComponent} from "../base-list-component";
 
 @Component({
   selector: 'rafr-feature-request-list',
   templateUrl: './feature-request-list.component.html',
   styleUrls: ['./feature-request-list.component.scss']
 })
-export class FeatureRequestListComponent implements OnInit {
-  featureRequestList: Observable<FeatureRequest[]>;
-
+export class FeatureRequestListComponent extends BaseListComponent<FeatureRequest> {
   constructor(private featureRequestService: FeatureRequestService) {
+    super();
   }
 
-  ngOnInit() {
-    this.featureRequestList = this.featureRequestService.getFeatureRequestList();
+  getList(page, limit) {
+    return this.featureRequestService.getList(page, limit);
   }
 }
