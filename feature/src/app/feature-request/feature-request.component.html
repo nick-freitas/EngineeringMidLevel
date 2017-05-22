@@ -1,47 +1,30 @@
 <div *ngIf="featureRequest | async; let featureRequest; else featureRequestNotLoaded">
-  <div class="card">
-    <div class="card-header d-flex justify-content-between">
-      <h3>Feature Request</h3>
-      <div class="view-button-group" *ngIf="!editing">
-        <button type="button" class="btn btn-primary pull-right" (click)="enableEditing(featureRequest)">Edit</button>
-      </div>
-      <div class="edit-button-group" *ngIf="editing">
-        <button type="button" class="btn btn-danger pull-right" (click)="destroy(featureRequest.id)">Delete</button>
-        <button type="button" class="btn btn-secondary pull-right" (click)="cancel()">Cancel</button>
-        <button type="button" class="btn btn-primary pull-right" (click)="save(featureRequest)">Save</button>
-      </div>
-    </div>
+  <rafr-feature-request-header [featureRequest]="featureRequest">
+    (reemitFeatureRequest)="resetFeatureRequest()">
+  </rafr-feature-request-header>
 
-    <div class="card-block" *ngIf="editing; else viewModeCardBlock">
-      <div class="form-group row">
-        <label for="feature-request-id" class="col-2 col-form-label">Id</label>
-        <div class="col-10">
-          <input class="form-control" type="text" [ngModel]="featureRequest.id" id="feature-request-id" name="id"
-                 disabled>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="feature-request-title" class="col-2 col-form-label">Title</label>
-        <div class="col-10">
-          <input class="form-control" type="text" [(ngModel)]="featureRequest.title" id="feature-request-title"
-                 name="title">
-        </div>
-      </div>
+  <div class="card" id="thread-section" *ngIf="threads | async; let threads; else threadsNotLoaded">
+    <div class="card-header">
+      <h4>Discussion Threads</h4>
     </div>
-
-    <ng-template #viewModeCardBlock>
-      <div class="card-block">
-        <p class="card-text">Id: {{featureRequest.id}}</p>
-        <p class="card-text">Title: {{featureRequest.title}}</p>
-        <p class="card-text">Description: {{featureRequest.description}}</p>
-        <p class="card-text">Client: {{featureRequest.client}}</p>
-        <p class="card-text">Client Priority: {{featureRequest.clientPriority}}</p>
-        <p class="card-text">Target Date: {{featureRequest.targetDate}}</p>
-        <p class="card-text">Ticket Url: {{featureRequest.ticketUrl}}</p>
-      </div>
-    </ng-template>
+    <div class="card-block" *ngFor="let thread of threads">
+      <h4 class="card-title">{{thread.name}}</h4>
+      <a class="card-link" [routerLink]="['/threads', thread.id]">See more</a>
+    </div>
   </div>
 
+  <!--move loader to separate component-->
+  <ng-template #threadsNotLoaded>
+    <div class="card">
+      <div class="card-block">
+        <span i18n>Loading discussion threads...</span>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated w-100" role="progressbar"
+               aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </div>
 
 <ng-template #featureRequestNotLoaded>

@@ -1,0 +1,2 @@
+<button type="button" class="btn btn-outline-secondary btn-lg btn-block" *ngIf="status === 'CLOSED'" disabled>Feature Request Already Completed</button>
+<button type="button" class="btn btn-success btn-lg btn-block" *ngIf="status !== 'CLOSED'" (click)="closeFeatureRequest()">Complete Feature Request</button>

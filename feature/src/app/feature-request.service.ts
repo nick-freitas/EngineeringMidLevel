@@ -12,6 +12,7 @@ export class FeatureRequestService extends BaseService {
   private createFeatureRequestUrl: () => string;
   private updateFeatureRequestUrl: (id) => string;
   private destroyFeatureRequestUrl: (id) => string;
+  private closeFeatureRequestUrl: (id) => string;
 
   constructor(private http: Http) {
     super();
@@ -21,6 +22,7 @@ export class FeatureRequestService extends BaseService {
     this.createFeatureRequestUrl = () => `${this.baseUrl}features`;
     this.updateFeatureRequestUrl = (id) => `${this.baseUrl}features/${id}`;
     this.destroyFeatureRequestUrl = (id) => `${this.baseUrl}features/${id}`;
+    this.closeFeatureRequestUrl = (id) => `${this.baseUrl}features/${id}/close`;
   }
 
   getFeatureRequestList(): Observable<FeatureRequest[]> {
@@ -28,22 +30,17 @@ export class FeatureRequestService extends BaseService {
       .map(res => {
         const resFeatureRequests = res.json() || [];
 
-        return resFeatureRequests.map(resFeatureRequest => new FeatureRequest(resFeatureRequest.id,
-          resFeatureRequest.title, resFeatureRequest.description, resFeatureRequest.clientPriority,
-          resFeatureRequest.client, resFeatureRequest.targetDate, resFeatureRequest.ticketUrl,
-          resFeatureRequest.productArea, resFeatureRequest.status));
+        return resFeatureRequests.map(resFeatureRequest => this.createFeatureRequestFromResponse(resFeatureRequest));
       })
       .catch(this.errorHandler);
   }
 
-  getFeatureRequest(id: number): Observable<FeatureRequest> {
+  async getFeatureRequest(id: number): Promise<Observable<FeatureRequest>> {
     return this.http.get(this.getFeatureRequestUrl(id))
       .map(res => {
         const resFeatureRequest = res.json() || {};
 
-        return new FeatureRequest(resFeatureRequest.id, resFeatureRequest.title, resFeatureRequest.description,
-          resFeatureRequest.clientPriority, resFeatureRequest.client, resFeatureRequest.targetDate,
-          resFeatureRequest.ticketUrl, resFeatureRequest.productArea, resFeatureRequest.status);
+        return this.createFeatureRequestFromResponse(resFeatureRequest);
       })
       .catch(this.errorHandler);
   }
@@ -53,9 +50,7 @@ export class FeatureRequestService extends BaseService {
       .map(res => {
         const resFeatureRequest = res.json() || {};
 
-        return new FeatureRequest(resFeatureRequest.id, resFeatureRequest.title, resFeatureRequest.description,
-          resFeatureRequest.clientPriority, resFeatureRequest.client, resFeatureRequest.targetDate,
-          resFeatureRequest.ticketUrl, resFeatureRequest.productArea, resFeatureRequest.status);
+        return this.createFeatureRequestFromResponse(resFeatureRequest);
       })
       .catch(this.errorHandler);
   }
@@ -63,14 +58,13 @@ export class FeatureRequestService extends BaseService {
   updateFeatureRequest(id, _featureRequest): Observable<FeatureRequest> {
     const featureRequest = Object.assign({}, _featureRequest);
     delete featureRequest.id;
+    delete featureRequest.status;
 
     return this.http.put(this.updateFeatureRequestUrl(id), featureRequest)
       .map(res => {
         const resFeatureRequest = res.json() || {};
 
-        return new FeatureRequest(resFeatureRequest.id, resFeatureRequest.title, resFeatureRequest.description,
-          resFeatureRequest.clientPriority, resFeatureRequest.client, resFeatureRequest.targetDate,
-          resFeatureRequest.ticketUrl, resFeatureRequest.productArea, resFeatureRequest.status);
+        return this.createFeatureRequestFromResponse(resFeatureRequest);
       })
       .catch(this.errorHandler);
   }
@@ -79,5 +73,21 @@ export class FeatureRequestService extends BaseService {
     return this.http.delete(this.destroyFeatureRequestUrl(id))
       .map(res => res.json())
       .catch(this.errorHandler);
+  }
+
+  closeFeatureRequest(id): Observable<FeatureRequest> {
+    return this.http.post(this.closeFeatureRequestUrl(id), null)
+      .map(res => {
+        const resFeatureRequest = res.json() || {};
+
+        return this.createFeatureRequestFromResponse(resFeatureRequest);
+      })
+      .catch(this.errorHandler);
+  }
+
+  private createFeatureRequestFromResponse(featureRequest): FeatureRequest {
+    return new FeatureRequest(featureRequest.id, featureRequest.title, featureRequest.description,
+      featureRequest.clientPriority, featureRequest.client, featureRequest.targetDate,
+      featureRequest.ticketUrl, featureRequest.productArea, featureRequest.status)
   }
 }
