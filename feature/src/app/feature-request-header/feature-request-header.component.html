@@ -1,9 +1,9 @@
 <div class="card">
   <div class="card-header d-flex justify-content-between">
-    <h3>Feature Request</h3>
+    <h3>{{featureRequest.title}}</h3>
     <div class="edit-button-group" *ngIf="editing; else viewModeButtonGroup">
       <button type="button" class="btn btn-danger pull-right" (click)="destroy()">Delete</button>
-      <button type="button" class="btn btn-secondary pull-right" (click)="cancel()">Cancel</button>
+      <button type="button" class="btn btn-secondary pull-right" (click)="cancel()" disabled>Cancel</button>
       <button type="button" class="btn btn-primary pull-right" (click)="save()">Save</button>
     </div>
     <ng-template #viewModeButtonGroup>
@@ -14,13 +14,6 @@
   </div>
 
   <div class="card-block" *ngIf="editing; else viewModeCardBlock">
-    <div class="form-group row">
-      <label for="feature-request-id" class="col-2 col-form-label">Id</label>
-      <div class="col-10">
-        <input class="form-control" type="text" [ngModel]="featureRequest.id" id="feature-request-id" name="id"
-               disabled>
-      </div>
-    </div>
     <div class="form-group row">
       <label for="feature-request-title" class="col-2 col-form-label">Title</label>
       <div class="col-10">
@@ -80,7 +73,6 @@
   </div>
   <ng-template #viewModeCardBlock>
     <div class="card-block">
-      <p class="card-text">Id: {{featureRequest.id}}</p>
       <p class="card-text">Title: {{featureRequest.title}}</p>
       <p class="card-text">Description: {{featureRequest.description}}</p>
       <p class="card-text">Product Area: {{(featureRequest.productArea | populate: (productAreas | async))?.name}}</p>

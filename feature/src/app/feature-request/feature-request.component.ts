@@ -36,7 +36,7 @@ export class FeatureRequestComponent implements OnInit {
     return this.threadService.getThreadListForFeature(id);
   }
 
-  //todo cancel is not working preperly
+  //todo cancel is not working properly
   async resetFeatureRequest() {
     this.featureRequest = await this.fetchFeatureRequest();
   }
