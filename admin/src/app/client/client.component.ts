@@ -33,17 +33,17 @@ export class ClientComponent implements OnInit {
   }
 
   save(client: Client) {
-    this.client = this.clientService.updateClient(client.id, client);
+    this.client = this.clientService.update(client.id, client);
     this.editing = false;
   }
 
   destroy(clientId: number) {
-    this.clientService.destroyClient(clientId)
+    this.clientService.destroy(clientId)
       .subscribe(client => this.router.navigate([`/clients`]));
   }
 
   private fetchClient() {
     const id = this.route.snapshot.params['id'];
-    this.client = this.clientService.getClient(id);
+    this.client = this.clientService.getOne(id);
   }
 }

@@ -16,7 +16,7 @@ export class CreateProductAreaComponent {
   }
 
   createProductArea() {
-    this.productAreaService.createProductArea(this.productAreaModel)
+    this.productAreaService.create(this.productAreaModel)
       .subscribe(productArea => this.router.navigate([`/product-areas/${productArea.id}`]));
   }
 }

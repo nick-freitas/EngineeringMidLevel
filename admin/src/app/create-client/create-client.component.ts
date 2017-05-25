@@ -16,7 +16,7 @@ export class CreateClientComponent {
   }
 
   createClient() {
-    this.clientService.createClient(this.clientModel)
+    this.clientService.create(this.clientModel)
       .subscribe(client => this.router.navigate([`/clients/${client.id}`]));
   }
 }

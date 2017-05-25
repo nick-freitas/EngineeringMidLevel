@@ -33,17 +33,17 @@ export class ProductAreaComponent implements OnInit {
   }
 
   save(productArea: ProductArea) {
-    this.productArea = this.productAreaService.updateProductArea(productArea.id, productArea);
+    this.productArea = this.productAreaService.update(productArea.id, productArea);
     this.editing = false;
   }
 
   destroy(productAreaId: number) {
-    this.productAreaService.destroyProductArea(productAreaId)
+    this.productAreaService.destroy(productAreaId)
       .subscribe(productArea => this.router.navigate([`/product-areas`]));
   }
 
   private fetchProductArea() {
     const id = this.route.snapshot.params['id'];
-    this.productArea = this.productAreaService.getProductArea(id);
+    this.productArea = this.productAreaService.getOne(id);
   }
 }
