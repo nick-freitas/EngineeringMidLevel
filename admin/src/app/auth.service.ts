@@ -3,6 +3,7 @@ import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
 import auth0 from "auth0-js";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {environment} from "../environments/environment";
 
 @Injectable()
 export class AuthService {
@@ -11,10 +12,10 @@ export class AuthService {
     domain: 'rafr-admin.auth0.com',
     responseType: 'token id_token',
     audience: 'https://rafr-admin.auth0.com/userinfo',
-    redirectUri: 'http://localhost:4200/callback',
+    redirectUri: environment.loginCallbackUrl,
     scope: 'openid'
   });
-  isAuthenticated: BehaviorSubject <Boolean>;
+  isAuthenticated: BehaviorSubject<Boolean>;
 
   constructor(public router: Router) {
     this.isAuthenticated = new BehaviorSubject<Boolean>(true);
