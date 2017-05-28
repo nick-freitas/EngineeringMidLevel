@@ -4,8 +4,23 @@ import {ThreadService} from "../thread.service";
 
 @Component({
   selector: 'rafr-create-thread',
-  templateUrl: './create-thread.component.html',
-  styleUrls: ['./create-thread.component.scss']
+  template: `
+    <div class="card">
+      <div class="card-block">
+        <form (ngSubmit)="createThread()" #createThreadForm="ngForm">
+          <h4 class="card-title">Create Thread</h4>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp"
+                   placeholder="Enter name"
+                   [(ngModel)]="threadModel.name" required>
+            <small id="nameHelp" class="form-text text-muted">The thread's name</small>
+          </div>
+          <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+      </div>
+    </div>
+  `
 })
 export class CreateThreadComponent {
   threadModel: ThreadModel;
@@ -16,7 +31,7 @@ export class CreateThreadComponent {
     this.threadModel = {};
   }
 
-  // todo missing all of the fields t create
+  // todo missing all of the fields to create
   createThread() {
     const id = this.route.snapshot.params['id'];
     this.threadService.createForFeature(id, this.threadModel)

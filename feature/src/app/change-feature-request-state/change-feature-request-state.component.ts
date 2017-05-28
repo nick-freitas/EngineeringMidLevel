@@ -3,8 +3,14 @@ import {FeatureRequestService} from "../feature-request.service";
 
 @Component({
   selector: 'rafr-change-feature-request-state',
-  templateUrl: './change-feature-request-state.component.html',
-  styleUrls: ['./change-feature-request-state.component.scss']
+  template: `
+    <button type="button" class="btn btn-outline-secondary btn-lg btn-block" *ngIf="status === 'CLOSED'" disabled i18n>
+      Feature Request Already Completed
+    </button>
+    <button type="button" class="btn btn-success btn-lg btn-block" *ngIf="status !== 'CLOSED'"
+            (click)="closeFeatureRequest()" i18n>Complete Feature Request
+    </button>
+  `
 })
 export class ChangeFeatureRequestStateComponent {
   @Input() status: string;

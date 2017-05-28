@@ -1,16 +1,25 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from "@angular/core";
 
 @Component({
   selector: 'rafr-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  template: `
+    <footer class="footer navbar-fixed-bottom">
+      <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+      </div>
+    </footer>
+  `,
+  styles: [`
+    :host {
+      margin-top: 16px;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      line-height: 60px;
+      background-color: #f5f5f5;
+    }
+  `]
 })
-export class FooterComponent implements OnInit {
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
+export class FooterComponent {
 }

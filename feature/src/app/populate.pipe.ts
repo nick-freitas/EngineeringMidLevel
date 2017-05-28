@@ -1,6 +1,8 @@
 import {Pipe, PipeTransform} from "@angular/core";
 
-@Pipe({name: 'populate'})
+@Pipe({
+  name: 'populate'
+})
 export class PopulatePipe implements PipeTransform {
   transform(id: any, list: any[]): any {
     if (!id || !list) {

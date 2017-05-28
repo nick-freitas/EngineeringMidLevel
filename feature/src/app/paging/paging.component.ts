@@ -2,8 +2,25 @@ import {Component, DoCheck, EventEmitter, Input, Output} from "@angular/core";
 
 @Component({
   selector: 'rafr-paging',
-  templateUrl: './paging.component.html',
-  styleUrls: ['./paging.component.scss']
+  template: `
+    <nav aria-label="...">
+      <ul class="pagination pagination-lg justify-content-end">
+        <li class="page-item" [ngClass]="{disabled: page === 1}">
+          <a class="page-link" (click)="setPage(page - 1)">Previous</a>
+        </li>
+        <li class="page-item" [ngClass]="{active: page === pageNumber + 1}"
+            *ngFor="let pageNumber of numberOfPages | forNumber">
+          <span class="page-link" *ngIf="page === pageNumber + 1; else showLink">{{pageNumber + 1}}</span>
+          <ng-template #showLink>
+            <a class="page-link" (click)="setPage(pageNumber + 1)">{{pageNumber + 1}}</a>
+          </ng-template>
+        </li>
+        <li class="page-item" [ngClass]="{disabled: page === numberOfPages}">
+          <a class="page-link" (click)="setPage(page + 1)">Next</a>
+        </li>
+      </ul>
+    </nav>
+  `
 })
 export class PagingComponent implements DoCheck {
   @Input() totalCount: number;

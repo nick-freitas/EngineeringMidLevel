@@ -10,7 +10,11 @@ import {ThreadService} from "../thread.service";
 @Component({
   selector: 'rafr-feature-request',
   templateUrl: './feature-request.component.html',
-  styleUrls: ['./feature-request.component.scss']
+  styles: [`
+    #thread-section {
+      margin-top: 12px;
+    }
+  `]
 })
 export class FeatureRequestComponent implements OnInit {
   featureRequest: Observable<FeatureRequest>;

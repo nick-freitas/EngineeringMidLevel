@@ -6,7 +6,12 @@ import {BaseListComponent} from "../base-list-component";
 @Component({
   selector: 'rafr-feature-request-list',
   templateUrl: './feature-request-list.component.html',
-  styleUrls: ['./feature-request-list.component.scss']
+  styles: [`
+    rafr-feature-request-list-result {
+      display: block;
+      margin-top: 12px;
+    }
+  `]
 })
 export class FeatureRequestListComponent extends BaseListComponent<FeatureRequest> {
   constructor(private featureRequestService: FeatureRequestService) {

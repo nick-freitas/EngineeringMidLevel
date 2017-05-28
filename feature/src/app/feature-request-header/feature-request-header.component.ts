@@ -11,8 +11,7 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'rafr-feature-request-header',
-  templateUrl: './feature-request-header.component.html',
-  styleUrls: ['./feature-request-header.component.scss']
+  templateUrl: './feature-request-header.component.html'
 })
 export class FeatureRequestHeaderComponent implements OnInit {
   @Input() featureRequest: FeatureRequest;
