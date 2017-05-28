@@ -7,8 +7,7 @@ import {ProductAreaService} from "../product-area.service";
 
 @Component({
   selector: 'rafr-product-area',
-  templateUrl: './product-area.component.html',
-  styleUrls: ['./product-area.component.scss']
+  templateUrl: './product-area.component.html'
 })
 export class ProductAreaComponent implements OnInit {
   productArea: Observable<ProductArea>;
@@ -23,7 +22,7 @@ export class ProductAreaComponent implements OnInit {
     this.fetchProductArea();
   }
 
-  enableEditing(originalProductArea: ProductArea) {
+  enableEditing() {
     this.editing = true;
   }
 

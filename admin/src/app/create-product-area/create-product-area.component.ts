@@ -4,8 +4,7 @@ import {ProductAreaService} from "../product-area.service";
 
 @Component({
   selector: 'rafr-create-product-area',
-  templateUrl: './create-product-area.component.html',
-  styleUrls: ['./create-product-area.component.scss']
+  templateUrl: './create-product-area.component.html'
 })
 export class CreateProductAreaComponent {
   productAreaModel: ProductAreaModel;

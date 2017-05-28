@@ -1,14 +1,18 @@
-import {Component, Input} from "@angular/core";
+import {ChangeDetectionStrategy, Component, Input} from "@angular/core";
 import {ProductArea} from "../product-area";
 
 @Component({
   selector: 'rafr-product-area-list-result',
-  templateUrl: './product-area-list-result.component.html',
-  styleUrls: ['./product-area-list-result.component.scss']
+  template: `
+    <div class="card">
+      <div class="card-block">
+        <h4 class="card-title">{{productArea?.name}}</h4>
+        <a class="card-link" [routerLink]="['/product-areas', productArea?.id]" i18n>See more</a>
+      </div>
+    </div>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductAreaListResultComponent {
   @Input() productArea: ProductArea;
-
-  constructor() {
-  }
 }

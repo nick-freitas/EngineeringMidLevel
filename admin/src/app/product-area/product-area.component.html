@@ -16,7 +16,7 @@
       <div class="form-group row">
         <label for="product-area-name" class="col-2 col-form-label">Name</label>
         <div class="col-10">
-          <input class="form-control" type="text" [(ngModel)]="productArea.name" id="product-area-name" name="name">
+          <input class="form-control" type="text" id="product-area-name" name="name" [(ngModel)]="productArea.name">
         </div>
       </div>
     </div>
@@ -27,7 +27,6 @@
       </div>
     </ng-template>
   </div>
-
 </div>
 
 <ng-template #productAreaNotLoaded>

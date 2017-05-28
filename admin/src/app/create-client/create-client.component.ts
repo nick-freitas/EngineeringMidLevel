@@ -4,8 +4,7 @@ import {ClientService} from "../client.service";
 
 @Component({
   selector: 'rafr-create-client',
-  templateUrl: './create-client.component.html',
-  styleUrls: ['./create-client.component.scss']
+  templateUrl: './create-client.component.html'
 })
 export class CreateClientComponent {
   clientModel: ClientModel;

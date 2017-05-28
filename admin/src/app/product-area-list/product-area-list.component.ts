@@ -6,8 +6,32 @@ import {BaseListComponent} from "../base-list-component";
 
 @Component({
   selector: 'rafr-product-area-list',
-  templateUrl: './product-area-list.component.html',
-  styleUrls: ['./product-area-list.component.scss']
+  template: `
+    <rafr-overview [title]="'Product Areas'"
+                   [createNew]="true"
+                   [createNewLink]="'/create-product-area'"
+                   [createNewText]="'Create New Product Area'"></rafr-overview>
+
+    <div *ngIf="list | async; let productAreaList; else productAreaListNotLoaded">
+      <rafr-product-area-list-result *ngFor="let productArea of productAreaList.productAreas"
+                                     [productArea]="productArea"></rafr-product-area-list-result>
+
+      <rafr-paging (changePage)="setPage($event)"
+                   [limit]="limit"
+                   [page]="page"
+                   [totalCount]="productAreaList.totalCount"></rafr-paging>
+    </div>
+
+    <ng-template #productAreaListNotLoaded>
+      <rafr-loading [loadingText]="'Loading product area list'"></rafr-loading>
+    </ng-template>
+  `,
+  styles: [`
+    rafr-product-area-list-result {
+      display: block;
+      margin-top: 12px;
+    }
+  `]
 })
 export class ProductAreaListComponent extends BaseListComponent<ProductArea> {
   constructor(private productAreaService: ProductAreaService) {

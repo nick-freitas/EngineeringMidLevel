@@ -5,8 +5,33 @@ import {BaseListComponent} from "../base-list-component";
 
 @Component({
   selector: 'rafr-client-list',
-  templateUrl: './client-list.component.html',
-  styleUrls: ['./client-list.component.scss']
+  template: `
+    <rafr-overview [title]="'Clients'"
+                   [createNew]="true"
+                   [createNewLink]="'/create-client'"
+                   [createNewText]="'Create New Client'"></rafr-overview>
+
+    <div *ngIf="list | async; let clientList; else clientListNotLoaded">
+      <rafr-client-list-result *ngFor="let client of clientList.list"
+                               [client]="client"></rafr-client-list-result>
+
+      <rafr-paging (changePage)="setPage($event)"
+                   [limit]="limit"
+                   [page]="page"
+                   [totalCount]="clientList.totalCount"></rafr-paging>
+    </div>
+
+    <ng-template #clientListNotLoaded>
+      <rafr-loading [loadingText]="'Loading client list'"></rafr-loading>
+    </ng-template>
+  `,
+  styles: [`
+    rafr-client-list-result,
+    rafr-paging {
+      display: block;
+      margin-top: 12px;
+    }
+  `]
 })
 export class ClientListComponent extends BaseListComponent<Client> {
   constructor(private clientService: ClientService) {

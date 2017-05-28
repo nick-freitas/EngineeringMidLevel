@@ -24,6 +24,7 @@ import {AuthGuard} from "./auth-guard.service";
 import { LoadingComponent } from './loading/loading.component';
 import { PagingComponent } from './paging/paging.component';
 import { ForNumberPipe } from './for-number.pipe';
+import { OverviewComponent } from './overview/overview.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ForNumberPipe } from './for-number.pipe';
     CallbackComponent,
     LoadingComponent,
     PagingComponent,
-    ForNumberPipe
+    ForNumberPipe,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,

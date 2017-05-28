@@ -3,8 +3,7 @@ import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'rafr-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  templateUrl: './header.component.html'
 })
 export class HeaderComponent {
   constructor(public auth: AuthService) {

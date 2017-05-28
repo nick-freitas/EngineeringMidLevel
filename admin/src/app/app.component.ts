@@ -3,8 +3,20 @@ import {AuthService} from "./auth.service";
 
 @Component({
   selector: 'rafr-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+    <rafr-header></rafr-header>
+
+    <div class="container" id="content">
+      <router-outlet></router-outlet>
+    </div>
+
+    <!--<rafr-footer></rafr-footer>-->
+  `,
+  styles: [`
+    #content {
+      padding-top: 18px;
+    }
+  `]
 })
 export class AppComponent {
   constructor(public auth: AuthService) {
