@@ -29,6 +29,7 @@ import {PostService} from "./post.service";
 import {ThreadPostListComponent} from "./thread-post-list/thread-post-list.component";
 import {PagingComponent} from "./paging/paging.component";
 import {ForNumberPipe} from "./for-number.pipe";
+import {LoadingComponent} from "./loading/loading.component";
 
 @NgModule({
   declarations: [
@@ -47,8 +48,9 @@ import {ForNumberPipe} from "./for-number.pipe";
     ThreadComponent,
     CreateThreadComponent,
     ThreadPostListComponent,
+    LoadingComponent,
     PagingComponent,
-    ForNumberPipe
+    ForNumberPipe,
   ],
   imports: [
     BrowserModule,
