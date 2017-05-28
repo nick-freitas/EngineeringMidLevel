@@ -22,4 +22,5 @@ export class CreateProductAreaComponent {
 
 interface ProductAreaModel {
   name?: string;
+  description?: string;
 }

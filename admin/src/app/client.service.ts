@@ -30,7 +30,13 @@ export class ClientService extends BaseService<Client> {
     return `${this.baseUrl}clients/${id}`;
   }
 
-  createNewInstance(client): Client {
-    return new Client(client.id, client.name);
+  /**
+   * Creates a new instance of client based on the client object provided to it
+   *
+   * @param client
+   * @returns {Client}
+   */
+  createNewInstance(client: any): Client {
+    return new Client(client.id, client.name, client.description);
   }
 }

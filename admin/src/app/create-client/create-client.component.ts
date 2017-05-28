@@ -22,4 +22,5 @@ export class CreateClientComponent {
 
 interface ClientModel {
   name?: string;
+  description?: string;
 }

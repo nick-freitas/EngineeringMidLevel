@@ -19,11 +19,20 @@
           <input class="form-control" type="text" id="product-area-name" name="name" [(ngModel)]="productArea.name">
         </div>
       </div>
+      <div class="form-group row">
+        <label for="description" class="col-2 col-form-label">Description</label>
+        <div class="col-10">
+          <textarea class="form-control" id="description" name="description" aria-describedby="descriptionHelp"
+                    placeholder="Enter description" [(ngModel)]="productArea.description" rows="3"
+                    required></textarea>
+        </div>
+      </div>
     </div>
 
     <ng-template #viewModeCardBlock>
       <div class="card-block">
         <p class="card-text">Name: {{productArea.name}}</p>
+        <p class="card-text">Description: {{productArea.description}}</p>
       </div>
     </ng-template>
   </div>

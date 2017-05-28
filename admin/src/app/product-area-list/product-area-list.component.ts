@@ -13,7 +13,7 @@ import {BaseListComponent} from "../base-list-component";
                    [createNewText]="'Create New Product Area'"></rafr-overview>
 
     <div *ngIf="list | async; let productAreaList; else productAreaListNotLoaded">
-      <rafr-product-area-list-result *ngFor="let productArea of productAreaList.productAreas"
+      <rafr-product-area-list-result *ngFor="let productArea of productAreaList.list"
                                      [productArea]="productArea"></rafr-product-area-list-result>
 
       <rafr-paging (changePage)="setPage($event)"
@@ -27,7 +27,8 @@ import {BaseListComponent} from "../base-list-component";
     </ng-template>
   `,
   styles: [`
-    rafr-product-area-list-result {
+    rafr-product-area-list-result,
+    rafr-paging {
       display: block;
       margin-top: 12px;
     }
