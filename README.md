@@ -1,4 +1,6 @@
-Test# Really Awesome Feature Requests!
+Test
+Version 1.0
+# Really Awesome Feature Requests!
 
 [![Build Status](https://travis-ci.org/nick-freitas/ReallyAwesomeFeatureRequests.svg?branch=master)](https://travis-ci.org/nick-freitas/ReallyAwesomeFeatureRequests)
 
